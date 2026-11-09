@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>Raportai</title>
+<style>
+:root{color-scheme:dark;--bg:#111;--card:#1b1b1b;--line:#2e2e2e;--tx:#eee;--mu:#999;--ac:#c8d94a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+h1{font-size:20px;letter-spacing:.15em;margin:0}
+h2{font-size:18px;margin:0 0 4px}
+p.s{color:var(--mu);margin:0 0 16px}
+button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--tx);padding:12px 16px}
+button.p{background:var(--ac);color:#111;border-color:var(--ac);font-weight:700}
+button.g{padding:6px 12px;font-size:13px;color:var(--mu)}
+.card{display:block;width:100%;text-align:left;margin-bottom:10px;padding:16px}
+.card b{display:block;letter-spacing:.05em}
+.card span{color:var(--mu);font-size:14px}
+label{display:block;margin:14px 0 4px;font-size:13px;color:var(--mu)}
+label i{color:var(--ac);font-style:normal;font-weight:700;margin-right:6px}
+input,select,textarea{width:100%;font:inherit;background:var(--card);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:11px}
+textarea{min-height:76px;resize:vertical}
+.row{display:flex;gap:8px}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto}
+.act{display:flex;gap:8px;flex-wrap:wrap}
+.act button{flex:1}
+.hide{display:none}
+.bar{height:6px;background:var(--line);border-radius:4px;margin-bottom:14px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--tx)}
+.wh{color:var(--mu);font-size:13px;letter-spacing:.05em;margin-bottom:6px}
+.cr{display:flex;align-items:center;gap:8px;margin:10px 0}
+.cr span{flex:1;font-weight:600}
+.cr button{width:52px;padding:10px 0;font-size:20px}
+.cr output{display:inline-block;width:46px;text-align:center;font-weight:700;font-size:20px}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tg button{padding:16px 10px;font-weight:600}
+.tg button.on{background:var(--tx);color:#111}
+.rw{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+label.ch{display:inline-block;margin:0 6px 6px 0}
+.ch input{display:none}
+.ch span{display:inline-block;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--tx);font-size:14px;cursor:pointer}
+.ch input:checked+span{background:var(--ac);color:#111;border-color:var(--ac);font-weight:700}
+</style>
+</head>
+<body>
+<main>
+<header><h1>RAPORTAI</h1><button class="g" id="clr">Išvalyti</button></header>
+<section id="v0"><h2>Pasirinkite raportą</h2><p class="s">Parinkite raportą, kurį norite parengti.</p><div id="list"></div></section>
+<section id="v1" class="hide"><h2 id="t1"></h2><p class="s" id="d1"></p><div id="form"></div>
+<div class="nav"><button id="b1">← Atgal</button><button class="p" id="n1">Toliau →</button></div></section>
+<section id="v2" class="hide"><h2>Patikrinkite raportą</h2><p class="s">Jei viskas teisinga, nukopijuokite arba dalinkitės tekstu.</p><pre id="out"></pre>
+<div class="act"><button class="p" id="cp">KOPIJUOTI RAPORTĄ</button><button id="sh">DALINTIS →</button></div>
+<div class="nav"><button id="b2">← Atgal</button></div></section>
+</main>
+<script>
+var Y=[["","–"],["A","A – skubiai (iki 1 val.)"],["B","B – skubiai chirurgiškai"],["C","C – prioritetas (iki 4 val.)"],["D","D – įprastas"],["E","E – patogumo"]];
+var R={
+medevac:{n:"9-LINER MEDEVAC",d:"Sužeistųjų evakuacijos raportas",num:1,f:[
+{id:"l1",gps:1,l:"Paėmimo vietos koordinatės (MGRS)",p:"pvz. 35U MB 12345 67890"},
+{id:"l2",l:"Radijo dažnis, šaukinys, pavadinimas"},
+{id:"l3",l:"Pacientų skaičius pagal skubumą",p:"pvz. A – 1, B – 0, C – 2",t:"a"},
+{id:"l4",l:"Reikalinga speciali įranga",t:"s",o:["Nereikia","Gelbėjimo keltuvas","Ištraukimo įranga","Ventiliatorius"]},
+{id:"l5",l:"Pacientai: gulintys / sėdintys",p:"pvz. gulintys 1, sėdintys 2"},
+{id:"l6",l:"Saugumas paėmimo vietoje",t:"s",o:["N – priešo nėra","P – galimas priešas","E – priešas vietovėje","X – ginkluotas konvojus būtinas"]},
+{id:"l7",l:"Paėmimo vietos žymėjimas",p:"pvz. dūmai, panelė, signalas"},
+{id:"l8",l:"Pacientų statusas ir tautybė",p:"pvz. LTU kariai"},
+{id:"l9",l:"CBRN ir vietovės aprašymas",t:"a"}]},
+sitrep:{n:"SITREP",d:"Situacijos raportas",fmt:function(v){var g=function(k){return v[k]||""};return "KAM: "+g("kam")+"\nNUO: "+g("nuo")+"\nPRANEŠIMAS SITREP Nr. "+g("nr")+"\nA: "+g("a")+"\nB: "+g("b")+"\nC: "+g("c")+"\nD: "+g("d")+"\nE: "+g("e")},f:[
+{id:"kam",l:"Kam (šaukinys)"},
+{id:"nuo",l:"Nuo ko (šaukinys)"},
+{id:"nr",l:"SITREP Nr."},
+{k:"A",id:"a",l:"Laikas DTG (raporto užpildymo laikas)",dt:1},
+{k:"B",id:"b",gps:1,l:"Dabartinė vieta (koordinatės MGRS)"},
+{k:"C",id:"c",l:"Kas atsitiko",t:"a"},
+{k:"D",id:"d",l:"Kas vyksta dabar / esama padalinio situacija",t:"a"},
+{k:"E",id:"e",l:"Ketinimai",t:"a"}]},
+salta:{n:"SALTA",d:"Kontakto raportas / SALTA",fmt:function(v){var g=function(k){return v[k]||""};return "Kam:\t"+g("kam")+"\nNuo ko:\t"+g("nuo")+"\nDTG:\t"+g("dtg")+"\n\tKONTAKTO RAPORTAS / SALTA\nRaporto numeris:\t"+g("nr")+"\nS :\t"+g("s")+"\nA :\t"+g("a")+"\nL :\t"+g("l")+"\nT :\t"+g("t")+"\nA :\t"+g("ad")+"\nBŪTINA PAGALBA:\t"+g("pg")},f:[
+{id:"kam",l:"Kam (šaukinys)"},
+{id:"nuo",l:"Nuo ko (šaukinys)"},
+{id:"dtg",l:"Data/Laikas DTG",dt:1},
+{id:"nr",l:"Raporto numeris"},
+{k:"S",id:"s",l:"PAJĖGOS/KAS (priešo pajėgos, dydis)",t:"a"},
+{k:"A",id:"a",l:"PRIEŠO VEIKSMAI (kas atsitiko)",t:"a"},
+{k:"L",id:"l",gps:1,l:"VIETA (dislokacija, jei yra žinoma)"},
+{k:"T",id:"t",l:"LAIKAS DTG (kontakto laikas)",dt:1},
+{k:"A",id:"ad",l:"DRAUGIŠKŲ PAJĖGŲ VEIKSMAI (kas padaryta ir ketinama)",t:"a"},
+{id:"pg",l:"BŪTINA PAGALBA (kokia reikalinga pagalba)",t:"a"}]},
+salute:{n:"SALUTE",d:"Pastebėjimo raportas / SALUTE",fmt:function(v){var g=function(k){return v[k]||""};return "Kam:\t"+g("kam")+"\nNuo ko:\t"+g("nuo")+"\nDTG:\t"+g("dtg")+"\n\tPASTEBĖJIMO RAPORTAS / SALUTE\nRaporto numeris:\t"+g("nr")+"\nS :\t"+g("s")+"\nA :\t"+g("a")+"\nL :\t"+g("l")+"\nU :\t"+g("u")+"\nT :\t"+g("t")+"\nE :\t"+g("e")},f:[
+{id:"kam",l:"Kam (šaukinys)"},
+{id:"nuo",l:"Nuo ko (šaukinys)"},
+{id:"dtg",l:"Data/Laikas DTG",dt:1},
+{id:"nr",l:"Raporto numeris"},
+{k:"S",id:"s",l:"Priešo padalinio DYDIS",p:"pvz. 5 asmenys, 2 automobiliai"},
+{k:"A",id:"a",l:"Priešo padalinio VEIKSMAI",t:"a"},
+{k:"L",id:"l",gps:1,l:"Priešo buvimo VIETA"},
+{k:"U",id:"u",l:"Priešo padalinio RŪŠIS"},
+{k:"T",id:"t",l:"Priešo veiksmų DATA ir LAIKAS",dt:1},
+{k:"E",id:"e",l:"Priešo GINKLUOTĖ, EKIPUOTĖ, TECHNIKA",t:"a"}]},
+mist:{n:"MIST",d:"Sužeistojo raportas pagal TCCC kortelę",fmt:function(v){var g=function(k){return v[k]||""};var rw=function(k,l){var a=(v[k]||"").split("|").filter(Boolean).join(" ");return a?l+": "+a:""},j=function(a){return a.filter(Boolean).join("; ")},tl=[j([g("tq")&&"Turniketas: "+g("tq"),g("tv")&&"Tvarstis: "+g("tv")]),g("ta"),g("tb"),j([rw("fl","Skysčiai"),rw("bl","Kraujo produktai"),rw("an","Analgetikai"),rw("ab","Antibiotikai"),rw("ot","Kita")]),g("to")],tx=["„C“: ","A: ","B: ","C: ","Kita: "].map(function(p,n){return tl[n]?p+tl[n]:""}).filter(Boolean);return "M: "+g("m")+"\nI: "+g("i")+"\nS: "+[g("sp")&&"P "+g("sp"),g("rr")&&"KD "+g("rr"),g("av")&&"AVPU "+g("av").charAt(0)].filter(Boolean).join(", ")+"\nT:"+(tx.length?"\n"+tx.join("\n"):"")},f:[
+{k:"M",id:"m",l:"Sužeidimo mechanizmas",t:"c",o:["Šautinis (GSW)","Sprogimas (blast)","Nudegimas (burn)","Buka trauma (blunt)","Kita (other)"]},
+{k:"I",id:"i",l:"Sužeidimo vieta",t:"c",o:["D ranka","K ranka","D koja","K koja","Galva","Kaklas","Krūtinė","Pilvas","Nugara","Dubuo / tarpvietė"]},
+{k:"S",id:"sp",n:1,l:"Gyvybinės funkcijos – pulsas (dūdžiai/min)",p:"pvz. 110"},
+{id:"rr",n:1,l:"Kvėpavimo dažnis (kv./min)",p:"pvz. 18"},
+{id:"av",l:"Sąmonė (AVPU)",t:"s",o:["A – budrus","V – reaguoja į balsą","P – reaguoja į skausmą","U – nereaguoja"]},
+{k:"T",id:"tq",l:"„C“ – Turniketas (TQ)",t:"c",o:["Galūnės","Jungties (junctional)"]},
+{id:"tv",l:"„C“ – Tvarstis (dressing)",t:"c",o:["Hemostatinis","Spaudžiamasis","Kita"]},
+{id:"ta",l:"A – Kvėpavimo takai",t:"c",o:["Nazofar. (NPA)","I-gel","Kriko. (CRIC)","Kita"]},
+{id:"tb",l:"B – Kvėpavimas",t:"c",o:["Okliuzinis tvarstis (chest seal)","Ad. dekompresija (needle)","O₂","Krūtinės vamz. (chest tube)"]},
+{id:"fl",t:"r",l:"C – Skysčiai (fluids)"},
+{id:"bl",t:"r",l:"C – Kraujo produktai (blood product)"},
+{id:"an",t:"r",l:"C – Analgetikai",o:["Ketaminas","Fentanilis"]},
+{id:"ab",t:"r",l:"C – Antibiotikai",o:["Moksifloksacinas","Ertapenemas"]},
+{id:"ot",t:"r",l:"C – Kita (pvz., TXA)",o:["TXA"]},
+{id:"to",l:"Kita pagalba",t:"c",o:["Tvarstymas (wound dressing)","Imobilizavimas (splinting)","Akies gaubtelis D","Akies gaubtelis K","Hipotermijos prevencija","Kita"]}]}
+};
+R.medevac={n:"9-LINER MEDEVAC",d:"Sužeistųjų evakuacijos raportas",wiz:1,fmt:function(v){var o=["9-LINER MEDEVAC"];for(var i=1;i<10;i++)o.push(i+". "+(v["l"+i]||"-"));return o.join("\n")},f:[
+{id:"l1",gps:1,t:"a",l:"Surinkimo vietos koordinatės",p:"Įveskite koordinates (MGRS)"},
+{id:"l2",t:"a",l:"Surinkimo vietos dažnis, šaukinys, slaptažodis",p:"Pvz. dažnis, šaukinys, slaptažodis"},
+{id:"l3",t:"n",l:"Sužeistųjų skaičius pagal pirmenybę",h:"A - reikia evakuoti 2 val. laikotarpyje\nB - reikalingas chirurginis gydymas per 2 val.\nC - sužeistieji, kurių išgelbėjimui reikalinga evakuacija per 4 val.",o:[["A","Neatidėliotini"],["B","Neatidėliotini - chirurginiai"],["C","Skubūs"],["D","Įprastinė evakuacija"],["E","Evakuojami pagal galimybes"]]},
+{id:"l4",t:"n",l:"Reikalinga speciali įranga",o:[["A","Nereikalinga"],["B","Keltuvai"],["C","Neštuvai"],["D","Dirbtinė plaučių ventiliacija"]]},
+{id:"l5",t:"n",l:"Sužeistųjų skaičius pagal tipus",o:[["L","Gulintys (neštuvuose)"],["A","Sėdintys (ambulatoriniai)"]]},
+{id:"l6",t:"b",l:"Susirinkimo vietos pavojaus laipsnis",o:[["N","Rajone priešo nėra"],["P","Priešas gali būti rajone"],["E","Priešas rajone"],["X","Priešas rajone, reikalinga ginkluota palyda"]]},
+{id:"l7",t:"b",l:"Susirinkimo vietos pažymėjimo būdas",o:[["A","Spalvotas ženklas"],["B","Pirotechnika"],["C","Dūmai"],["D","Nėra"],["E","Kita"]]},
+{id:"l8",t:"n",l:"Sužeistųjų tautybė ir statusas",o:[["A","LT karys"],["B","LT civilis"],["C","Ne LT karys"],["D","Ne LT civilis"],["E","Priešo karo belaisvis"]]},
+{id:"l9",t:"b",m:1,l:"MNG situacija ir vietovės užterštumas",o:[["N","Branduolinis"],["B","Biologinis"],["C","Cheminis"]]}]};
+var cur=null,V={},st=0,MS=[V],mi=0,dj=-1;
+function $(i){return document.getElementById(i)}
+function show(n){for(var i=0;i<3;i++)$("v"+i).classList.toggle("hide",i!==n);window.scrollTo(0,0)}
+function now(){var d=new Date(),p=function(x){return String(x).padStart(2,"0")};return p(d.getUTCDate())+p(d.getUTCHours())+p(d.getUTCMinutes())+"Z "+["SAU","VAS","KOV","BAL","GEG","BIR","LIE","RGP","RGS","SPA","LAP","GRD"][d.getUTCMonth()]+" "+String(d.getUTCFullYear()).slice(2)}
+function mgrs(lat,lon){
+ var a=6378137,f=1/298.257223563,k0=0.9996,e2=f*(2-f),ep2=e2/(1-e2),e4=e2*e2,e6=e4*e2;
+ var z=Math.floor((lon+180)/6)+1,l0=((z-1)*6-180+3)*Math.PI/180,ph=lat*Math.PI/180,la=lon*Math.PI/180;
+ var s=Math.sin(ph),c=Math.cos(ph),N=a/Math.sqrt(1-e2*s*s),T=s*s/(c*c),C=ep2*c*c,A=c*(la-l0);
+ var M=a*((1-e2/4-3*e4/64-5*e6/256)*ph-(3*e2/8+3*e4/32+45*e6/1024)*Math.sin(2*ph)+(15*e4/256+45*e6/1024)*Math.sin(4*ph)-(35*e6/3072)*Math.sin(6*ph));
+ var x=k0*N*(A+(1-T+C)*Math.pow(A,3)/6+(5-18*T+T*T+72*C-58*ep2)*Math.pow(A,5)/120)+500000;
+ var y=k0*(M+N*(s/c)*(A*A/2+(5-T+9*C+4*C*C)*Math.pow(A,4)/24+(61-58*T+T*T+600*C-330*ep2)*Math.pow(A,6)/720));
+ if(lat<0)y+=10000000;
+ var b="CDEFGHJKLMNPQRSTUVWX".charAt(Math.min(19,Math.max(0,Math.floor((lat+80)/8))));
+ var col=["ABCDEFGH","JKLMNPQR","STUVWXYZ"][(z-1)%3].charAt(Math.floor(x/100000)-1);
+ var row="ABCDEFGHJKLMNPQRSTUV".charAt((Math.floor(y/100000)+(z%2===0?5:0))%20);
+ var P=function(v){return String(Math.floor(v%100000)).padStart(5,"0")};
+ return z+b+" "+col+row+" "+P(x)+" "+P(y)}
+function save(){try{localStorage.setItem("rp",JSON.stringify({c:cur,v:V,ms:MS,mi:mi}))}catch(e){}}
+function load(){try{var s=JSON.parse(localStorage.getItem("rp")||"null");if(s&&s.c&&R[s.c]){cur=s.c;V=s.v||{};if(cur==="mist"&&s.ms&&s.ms.length){MS=s.ms;mi=Math.min(s.mi||0,MS.length-1);V=MS[mi]}else{MS=[V];mi=0}return true}}catch(e){}return false}
+function build(){
+ var r=R[cur],h="";$("t1").textContent=cur==="mist"&&MS.length>1?"MIST "+(mi+1):r.n;$("d1").textContent=r.wiz?"":r.d;$("n1").textContent=r.wiz&&st===r.f.length-1?"Peržiūrėti":"Toliau →";
+ if(r.wiz)h+="<div class='bar'><i style='width:"+((st+1)*100/r.f.length)+"%'></i></div>";
+ (r.wiz?[r.f[st]]:r.f).forEach(function(f,i){
+  if(r.wiz)i=st;
+  var id="f_"+f.id,val=V[f.id]||"",lab=r.wiz?"<div class='wh'>"+(i+1)+" DALIS</div><h2>"+f.l+"</h2>"+(f.h?"<p class='s'>"+f.h.replace(/\n/g,"<br>")+"</p>":""):"<label for='"+id+"'>"+(r.num?"<i>"+(i+1)+"</i>":f.k?"<i>"+f.k+"</i>":"")+f.l+"</label>",el;
+  if(f.t==="r"){var rv=val.split("|"),dl="d_"+f.id,q=function(x){return (x||"").replace(/'/g,"&#39;")};el="<div class='rw' id='"+id+"'>"+(f.o?"<datalist id='"+dl+"'>"+f.o.map(function(o){return "<option value='"+o+"'>"}).join("")+"</datalist>":"")+"<input placeholder='Pavadinimas'"+(f.o?" list='"+dl+"'":"")+" value='"+q(rv[0])+"'><input placeholder='Dozė' value='"+q(rv[1])+"'><select><option value=''>Būdas</option>"+["IV","IO","IM","PO","IN"].map(function(o){return "<option"+(rv[2]===o?" selected":"")+">"+o+"</option>"}).join("")+"</select><input placeholder='Laikas' inputmode='numeric' value='"+q(rv[3])+"'></div>"}
+  else if(f.t==="n"){var mp={};val.split(", ").forEach(function(q){var z=q.split("-");if(z[0])mp[z[0]]=+z[1]});el="<div id='"+id+"'>"+f.o.map(function(o){return "<div class='cr' data-k='"+o[0]+"'><span><b>"+o[0]+"</b> — "+o[1]+"</span><button type='button' data-d='-1'>−</button><output>"+(mp[o[0]]||0)+"</output><button type='button' data-d='1'>+</button></div>"}).join("")+"</div>"}
+  else if(f.t==="b"){var sl=val.split(", ");el="<div class='tg' id='"+id+"'"+(f.m?" data-m='1'":"")+">"+f.o.map(function(o){return "<button type='button' data-k='"+o[0]+"'"+(sl.indexOf(o[0])>=0?" class='on'":"")+">"+o[0]+" — "+o[1]+"</button>"}).join("")+"</div>"}
+  else if(f.t==="c"){el="<div id='"+id+"'>"+f.o.map(function(o){return "<label class='ch'><input type='checkbox' value='"+o+"'"+(val.split(", ").indexOf(o)>=0?" checked":"")+"><span>"+o+"</span></label>"}).join("")+"</div>"}
+  else if(f.t==="s"){el="<select id='"+id+"'><option value=''>–</option>"+f.o.map(function(o){return "<option"+(o===val?" selected":"")+">"+o+"</option>"}).join("")+"</select>"}
+  else if(f.t==="a"){el="<textarea id='"+id+"' placeholder='"+(f.p||"")+"'>"+val.replace(/</g,"&lt;")+"</textarea>"+(f.gps?"<button type='button' data-gps='"+id+"' style='margin-top:8px'>GPS</button>":"")}
+  else if(f.gps){el="<div class='row'><input id='"+id+"' placeholder='"+(f.p||"")+"' value='"+val.replace(/'/g,"&#39;")+"'><button type='button' data-gps='"+id+"'>GPS</button></div>"}
+  else if(f.dt){el="<div class='row'><input id='"+id+"' placeholder='DDHHMMZ MMM YY' value='"+val+"'><button type='button' data-now='"+id+"'>Dabar</button></div>"}
+  else{el="<input id='"+id+"'"+(f.n?" inputmode='numeric'":"")+" placeholder='"+(f.p||"")+"' value='"+val.replace(/'/g,"&#39;")+"'>"}
+  h+=lab+el});
+ if(cur==="mist"){var tb="";if(MS.length>1){tb="<div style='margin-bottom:12px'>"+MS.map(function(_,j){return "<span style='display:inline-flex;margin:0 6px 6px 0'><button type='button' class='"+(j===mi?"p":"")+"' data-mi='"+j+"' style='padding:8px 12px;border-radius:8px 0 0 8px'>MIST "+(j+1)+"</button><button type='button' data-del='"+j+"' aria-label='Ištrinti' style='padding:8px 10px;border-radius:0 8px 8px 0;border-left:0"+(dj===j?";background:#c0392b;color:#fff":"")+"'>"+(dj===j?"Ištrinti?":"×")+"</button></span>"}).join("")+"</div>"}h=tb+h+"<button type='button' id='addm' style='width:100%;margin-top:22px'>Pridėti MIST "+(MS.length+1)+"</button>"}
+ $("form").innerHTML=h;
+ $("form").querySelectorAll("[data-now]").forEach(function(b){b.onclick=function(){$(b.dataset.now).value=now()}});
+ $("form").querySelectorAll("[data-mi]").forEach(function(b){b.onclick=function(){collect();dj=-1;mi=+b.dataset.mi;V=MS[mi];save();build();window.scrollTo(0,0)}});
+ $("form").querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){var j=+b.dataset.del;collect();dj=-1;MS.splice(j,1);if(mi>=MS.length)mi=MS.length-1;else if(mi>j)mi--;V=MS[mi];save();build();window.scrollTo(0,0)}});
+ var am=$("addm");if(am)am.onclick=function(){collect();dj=-1;MS.push({});mi=MS.length-1;V=MS[mi];save();build();window.scrollTo(0,0)};
+ $("form").querySelectorAll(".cr button").forEach(function(b){b.onclick=function(){var o=b.parentNode.querySelector("output");o.textContent=Math.max(0,Math.min(99,+o.textContent+ +b.dataset.d))}});
+ $("form").querySelectorAll(".tg").forEach(function(g){g.onclick=function(e){var b=e.target.closest("button");if(!b)return;var on=b.classList.contains("on");if(!g.dataset.m)g.querySelectorAll("button").forEach(function(x){x.classList.remove("on")});b.classList.toggle("on",!on)}});
+ $("form").querySelectorAll("[data-gps]").forEach(function(b){b.onclick=function(){var i=$(b.dataset.gps);
+  if(!navigator.geolocation){i.placeholder="GPS nepalaikomas";return}
+  b.textContent="...";
+  navigator.geolocation.getCurrentPosition(function(p){i.value=mgrs(p.coords.latitude,p.coords.longitude);b.textContent="GPS"},function(e){b.textContent="GPS";i.placeholder="GPS nepavyko: "+e.message},{enableHighAccuracy:true,timeout:15000,maximumAge:0})}});
+}
+function dtg(s){var M={JAN:"SAU",FEB:"VAS",MAR:"KOV",APR:"BAL",MAY:"GEG",JUN:"BIR",JUL:"LIE",AUG:"RGP",SEP:"RGS",OCT:"SPA",NOV:"LAP",DEC:"GRD"};return s.trim().toUpperCase().replace(/\b[A-Z]{3}\b/g,function(m){return M[m]||m})}
+function collect(){R[cur].f.forEach(function(f){var e=$("f_"+f.id);if(e)V[f.id]=f.t==="r"?(function(a){return a.join("")?a.join("|"):""})([].slice.call(e.querySelectorAll("input,select")).map(function(x){return x.value.trim().replace(/\|/g,"/")})):f.t==="n"?[].slice.call(e.querySelectorAll(".cr")).filter(function(r){return +r.querySelector("output").textContent>0}).map(function(r){return r.dataset.k+"-"+r.querySelector("output").textContent}).join(", "):f.t==="b"?[].slice.call(e.querySelectorAll("button.on")).map(function(x){return x.dataset.k}).join(", "):f.t==="c"?[].slice.call(e.querySelectorAll("input:checked")).map(function(x){return x.value}).join(", "):f.dt?dtg(e.value):e.value.trim()});save()}
+function text(){
+ var r=R[cur];if(r.fmt){if(cur==="mist"&&MS.length>1)return MS.map(function(d,j){return "MIST "+(j+1)+"\n"+r.fmt(d)}).join("\n\n");return r.fmt(V)}var o=[r.n+" – "+r.d.toUpperCase(),""];
+ r.f.forEach(function(f,i){var v=V[f.id];if(!v)return;
+  var pre=r.num?(i+1)+". ":f.k?f.k+" – ":"";
+  o.push(pre+f.l+": "+v)});
+ return o.join("\n")}
+var L=$("list");
+["sitrep","salute","salta","medevac","mist"].forEach(function(k){var b=document.createElement("button");b.className="card";b.innerHTML="<b>"+R[k].n+"</b><span>"+R[k].d+"</span>";
+ b.onclick=function(){if(cur!==k){V={};MS=[V];mi=0}cur=k;st=0;build();show(1)};L.appendChild(b)});
+$("b1").onclick=function(){collect();if(R[cur].wiz&&st>0){st--;build();window.scrollTo(0,0)}else show(0)};
+$("n1").onclick=function(){dj=-1;collect();if(R[cur].wiz&&st<R[cur].f.length-1){st++;build();window.scrollTo(0,0);return}$("out").textContent=text();show(2)};
+$("b2").onclick=function(){show(1)};
+$("clr").onclick=function(){V={};MS=[V];mi=0;cur=null;try{localStorage.removeItem("rp")}catch(e){}show(0)};
+$("cp").onclick=function(){var t=$("out").textContent,b=$("cp");
+ function ok(){b.textContent="NUKOPIJUOTA ✓";setTimeout(function(){b.textContent="KOPIJUOTI RAPORTĄ"},1800)}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb)}else fb();
+ function fb(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}a.remove()}};
+$("sh").onclick=function(){var t=$("out").textContent;if(navigator.share){navigator.share({text:t}).catch(function(){})}else{$("cp").click()}};
+if(load()){build()}
+</script>
+</body>
+</html>
