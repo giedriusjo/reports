@@ -1,5 +1,5 @@
 // Keisdami index.html, pakeiskite versijos numeri, kad telefonas atsinaujintu.
-var CACHE = "raportai-v2-1";
+var CACHE = "raportai-v2-20";
 var FILES = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", function (e) {

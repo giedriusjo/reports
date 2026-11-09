@@ -56,6 +56,10 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--card);border:1px
 .lb button.on{background:var(--ac);color:#111;border-color:var(--ac);font-weight:700}
 .lb .tm{width:130px}
 .ko{margin-top:6px}
+a{color:var(--ac)}
+.ins ol{padding-left:20px;margin:0}
+.ins li{margin:0 0 12px}
+.ins h3{font-size:16px;margin:22px 0 10px}
 .mist label,.mist summary,.mist input,.mist select,.mist textarea,.mist option,.mist .ch span,.mist .ic,.mist .lb,.mist .lb b,.mist .lb button,.mist .ac input::placeholder{font-size:16px;font-family:inherit}
 .mist>:not(label):not(.mt):not(#addm){margin-left:30px;width:calc(100% - 30px)}
 .mist>label:not(:has(>i)){margin-left:30px}
@@ -72,12 +76,39 @@ label.ch{display:inline-block;margin:0 6px 6px 0}
 <body>
 <main>
 <header><h1>RAPORTAI v2</h1><button class="g" id="clr">Išvalyti</button></header>
-<section id="v0"><h2>Pasirinkite raportą</h2><p class="s">Parinkite raportą, kurį norite parengti.</p><div id="list"></div></section>
+<section id="v0"><h2>Pasirinkite raportą</h2><p class="s">Parinkite raportą, kurį norite parengti.</p><div id="list"></div><p style="margin:20px 0 0;font-size:13px"><a href="#" id="ins" style="color:var(--mu)">Kaip pridėti prie pradžios ekrano (iPhone)</a></p></section>
 <section id="v1" class="hide"><h2 id="t1"></h2><p class="s" id="d1"></p><div id="form"></div>
 <div class="nav"><button id="b1">← Atgal</button><button class="p" id="n1">Toliau →</button></div></section>
 <section id="v2" class="hide"><h2>Patikrinkite raportą</h2><p class="s">Jei viskas teisinga, nukopijuokite arba dalinkitės tekstu.</p><pre id="out"></pre>
 <div class="act"><button class="p" id="cp">KOPIJUOTI RAPORTĄ</button><button id="sh">DALINTIS →</button></div>
 <div class="nav"><button id="b2">← Atgal</button><button class="p" id="ed">Redaguoti</button></div></section>
+<section id="v3" class="hide ins"><h2>Instrukcija</h2>
+<h3>Kaip pridėti prie pradžios ekrano (iPhone, Safari)</h3>
+<ol>
+<li>Atidarykite <b>Safari</b> ir įveskite <b>giedriusjo.github.io/reports/</b>. Pirmą kartą reikia interneto.</li>
+<li>Suraskite mygtuką <b>Share</b>:<br>• naujesnėse iOS versijose apačioje, adreso juostos dešinėje, paspauskite <b>tris taškus (⋯)</b>, tada <b>Share</b>;<br>• senesnėse versijose apatinėje juostoje yra <b>Share</b> ikona (kvadratas su rodykle aukštyn). Jei juostos nematyti, palieskite apatinį ekrano kraštą;<br>• jei adreso juosta viršuje, <b>Share</b> arba ⋯ yra jos dešiniajame gale.</li>
+<li>Meniu slinkite žemyn ir pasirinkite <b>Add to Home Screen</b>. Jei jo nėra, nuslinkite į patį apačią, paspauskite <b>Edit Actions</b> ir jį pridėkite.</li>
+<li>Pavadinimas turi būti <b>Raportai</b>. Jei matote <b>Open as Web App</b>, įjunkite. Viršuje dešinėje paspauskite <b>Add</b>.</li>
+<li>Ikona atsiras pradžios ekrane. Nuo šiol atidarykite tik iš jos, ne per Safari.</li>
+</ol>
+<h3>Kad veiktų be interneto</h3>
+<ol>
+<li>Atidarykite programėlę iš naujos ikonos <b>su internetu</b> ir kartą pereikite per visus raportus (SITREP, SALUTE, SALTA, 9-LINER, MIST).</li>
+<li>Kai paklaus apie vietą, pasirinkite <b>Allow While Using App</b>.</li>
+<li><b>Patikrinimas:</b> įjunkite <b>Airplane Mode</b>, programėlę visiškai uždarykite (perbraukite aukštyn iš apačios ir nubraukite kortelę), tada atidarykite iš ikonos dar kartą. Jei raportai rodomi, offline veikia.</li>
+</ol>
+<h3>MGRS: jei paspaudus GPS koordinatės nerodomos</h3>
+<p>Pati iPhone sistema MGRS nerodo (Compass ir Maps rodo tik platumą ir ilgumą). MGRS suskaičiuoja programėlė, kai paspaudžiate <b>GPS</b>, o tam telefonas turi leisti programėlei naudoti vietą.</p>
+<p>Atidarykite raportą su vietos lauku (pvz. SITREP B, SALUTE L, MIST) ir paspauskite <b>GPS</b>. Jei nepavyksta, lauke pasirodys klaidos tekstas, pvz. „GPS nepavyko: User denied Geolocation“.</p>
+<p>Patikrinkite iš eilės:</p>
+<ol>
+<li><b>Ar įjungta vieta telefone.</b> <b>Settings → Privacy &amp; Security → Location Services</b> turi būti <b>On</b>.</li>
+<li><b>Safari leidimas.</b> Toje pačioje vietoje (<b>Location Services</b>) nuslinkite iki <b>Safari Websites</b> (naujesnėse iOS versijose gali būti <b>Settings → Apps → Safari → Location</b>) ir pasirinkite <b>While Using the App</b>. Įjunkite <b>Precise Location</b>, kitaip koordinatės būna apytikslos arba nerodomos.</li>
+<li><b>Svetainės leidimas.</b> Pirmą kartą paspaudus <b>GPS</b>, telefonas paklaus <b>Allow While Using App</b>. Jei anksčiau pasirinkote <b>Don’t Allow</b>, klausimas nebekils. Atstatymas: <b>Settings → General → Transfer or Reset iPhone → Reset → Reset Location &amp; Privacy</b> (visos programėlės vietos leidimo paklaus iš naujo), tada programėlę uždarykite ir atidarykite iš naujo.</li>
+<li><b>Kraštutiniu atveju:</b> <b>Settings → Apps → Safari → Clear History and Website Data</b>. Tai ištrins visas svetainių duomenis, įskaitant išsaugotus juodraščius, o programėlę reikės atidaryti su internetu.</li>
+</ol>
+<p>Klaidų prasmė: <b>User denied Geolocation</b> – leidimas atmestas; <b>Timeout expired</b> – per 15 s signalo nerasta (išeikite po atviru dangumi ir bandykite dar kartą).</p>
+<div class="nav"><button id="b3">← Atgal</button></div></section>
 </main>
 <script>
 var Y=[["","–"],["A","A – skubiai (iki 1 val.)"],["B","B – skubiai chirurgiškai"],["C","C – prioritetas (iki 4 val.)"],["D","D – įprastas"],["E","E – patogumo"]];
@@ -152,7 +183,7 @@ R.medevac={n:"9-LINER MEDEVAC",d:"Sužeistųjų evakuacijos raportas",wiz:1,fmt:
 {id:"l9",t:"b",m:1,l:"MNG situacija ir vietovės užterštumas",o:[["N","Branduolinis"],["B","Biologinis"],["C","Cheminis"]]}]};
 var cur=null,V={},st=0,MS=[V],mi=0,dj=-1;
 function $(i){return document.getElementById(i)}
-function show(n){for(var i=0;i<3;i++)$("v"+i).classList.toggle("hide",i!==n);window.scrollTo(0,0)}
+function show(n){for(var i=0;i<4;i++)$("v"+i).classList.toggle("hide",i!==n);window.scrollTo(0,0)}
 function now(){var d=new Date(),p=function(x){return String(x).padStart(2,"0")};return p(d.getUTCDate())+" "+p(d.getUTCHours())+p(d.getUTCMinutes())+"Z "+["SAU","VAS","KOV","BAL","GEG","BIR","LIE","RGP","RGS","SPA","LAP","GRD"][d.getUTCMonth()]+" "+String(d.getUTCFullYear()).slice(2)}
 function mgrs(lat,lon){
  var a=6378137,f=1/298.257223563,k0=0.9996,e2=f*(2-f),ep2=e2/(1-e2),e4=e2*e2,e6=e4*e2;
@@ -213,6 +244,8 @@ var L=$("list");
 $("b1").onclick=function(){collect();if(R[cur].wiz&&st>0){st--;build();window.scrollTo(0,0)}else show(0)};
 $("n1").onclick=function(){dj=-1;collect();if(R[cur].wiz&&st<R[cur].f.length-1){st++;build();window.scrollTo(0,0);return}$("out").textContent=text();$("out").contentEditable="false";$("ed").textContent="Redaguoti";show(2)};
 $("b2").onclick=function(){show(1)};
+$("ins").onclick=function(e){e.preventDefault();show(3)};
+$("b3").onclick=function(){show(0)};
 $("clr").onclick=function(){V={};MS=[V];mi=0;cur=null;try{localStorage.removeItem("rp")}catch(e){}show(0)};
 $("cp").onclick=function(){var t=$("out").innerText,b=$("cp");
  function ok(){b.textContent="NUKOPIJUOTA ✓";setTimeout(function(){b.textContent="KOPIJUOTI RAPORTĄ"},1800)}
