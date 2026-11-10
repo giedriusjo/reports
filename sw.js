@@ -1,6 +1,6 @@
 // Keisdami index.html, pakeiskite versijos numeri, kad telefonas atsinaujintu.
-var CACHE = "raportai-v2-24";
-var FILES = ["./", "index.html", "manifest.webmanifest", "wolf-180.png", "wolf-192.png", "wolf-512.png"];
+var CACHE = "raportai-v2-27";
+var FILES = ["./", "index.html", "manifest.webmanifest", "wolf-180.png", "wolf-192.png", "wolf-512.png", "wolf-maskable-512.png"];
 
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(FILES); }));
