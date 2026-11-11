@@ -1,5 +1,5 @@
 // Keisdami index.html, pakeiskite versijos numeri, kad telefonas atsinaujintu.
-var CACHE = "raportai-v2-32";
+var CACHE = "raportai-v2-33";
 var FILES = ["./", "index.html", "manifest.webmanifest", "wolf-180.png", "wolf-192.png", "wolf-512.png", "wolf-maskable-512.png"];
 
 self.addEventListener("install", function (e) {
