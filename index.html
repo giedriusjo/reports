@@ -34,6 +34,12 @@ button.g{padding:6px 12px;font-size:13px;color:var(--mu)}
 .card b{display:block;letter-spacing:.05em}
 .card span{color:var(--mu);font-size:14px}
 .card .bdg{float:right;margin-top:2px;padding:2px 8px;border-radius:999px;font-size:12px;color:var(--tx);background:rgba(200,217,74,.28);border:1px solid rgba(200,217,74,.6)}
+.phb{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+.phb:empty{margin:0}
+.phb span{position:relative;line-height:0}
+.phb img{width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.phb span button{position:absolute;top:-6px;right:-6px;width:24px;height:24px;padding:0;border-radius:50%;line-height:1;color:#ff4d4d;font-weight:700;background:var(--bg)}
+.phb p{flex-basis:100%;margin:0;font-size:13px;line-height:1.4;color:var(--mu)}
 #warn:not(:empty){margin:0 0 10px;padding:10px 12px;border:1px solid #c0392b;border-radius:8px;color:#ff8a8a;font-size:14px}
 #hist details{border:1px solid var(--line);border-radius:8px;background:var(--card);margin-bottom:10px;padding:0 12px}
 #hist summary{padding:12px 0;cursor:pointer}
@@ -86,7 +92,7 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--card);border:1px
 .ko{display:inline-block;width:190px;max-width:100%;padding:8px 12px;margin:0 6px 6px 0;vertical-align:top;border-color:rgba(200,217,74,.6)}
 a{color:var(--ac)}
 .ins{font-size:15px;line-height:1.5}
-.ins ol{padding-left:24px;margin:0}
+.ins ol,.ins ul{padding-left:24px;margin:0}
 .ins li{margin:0 0 12px;padding-left:2px}
 .ins p{margin:0 0 14px}
 .ins h3{font-size:16px;line-height:1.3;margin:24px 0 12px;padding:8px 12px;border-radius:8px;background:rgba(200,217,74,.28);border:1px solid rgba(200,217,74,.6)}
@@ -111,11 +117,11 @@ label.ch{display:inline-block;margin:0 6px 6px 0}
 <body>
 <main>
 <header><div id="hb"><button class="g hide" id="wipe">Išvalyti</button><button class="g hide" id="clr">Grįžti</button></div></header>
-<section id="v0"><h1 style="margin:0 0 18px">RAPORTAI</h1><div id="list"></div><p style="margin:20px 0 0;font-size:13px"><a href="#" id="hl" style="color:var(--mu)">Išsiųstų raportų istorija</a></p><p style="margin:12px 0 0;font-size:13px"><a href="#" id="ins" style="color:var(--mu)">Kaip pridėti prie pradžios ekrano (iPhone, Android)</a></p><p id="ver" style="margin:22px 0 0;font-size:12px;color:var(--mu)"></p></section>
+<section id="v0"><h1 style="margin:0 0 14px">RAPORTAI</h1><div class="rw" style="margin:0 0 18px"><div><label for="hk" style="margin-top:0">Kam (šaukinys)</label><input id="hk" autocapitalize="characters"></div><div><label for="hn" style="margin-top:0">Nuo ko (šaukinys)</label><input id="hn" autocapitalize="characters"></div></div><div id="list"></div><p style="margin:20px 0 0;font-size:13px"><a href="#" id="hl" style="color:var(--mu)">Išsiųstų raportų istorija</a></p><p style="margin:12px 0 0;font-size:13px"><a href="#" id="ins" style="color:var(--mu)">Kaip pridėti prie pradžios ekrano (iPhone, Android)</a></p><p style="margin:-2px 0 0;font-size:13px"><a href="#" id="inp" style="color:var(--mu)">Kaip pridėti nuotrauką prie raporto</a></p><p id="ver" style="margin:22px 0 0;font-size:12px;color:var(--mu)"></p></section>
 <section id="v1" class="hide"><h2 id="t1"></h2><p class="s" id="d1"></p><div id="form"></div>
 <div class="nav"><button id="b1">← Atgal</button><button class="p" id="n1">Toliau →</button></div></section>
 <section id="v2" class="hide"><h2>Patikrinkite raportą</h2><p class="s">Jei viskas teisinga, nukopijuokite arba dalinkitės tekstu.</p><div id="warn"></div><pre id="out"></pre>
-<div class="act"><button class="p" id="cp">KOPIJUOTI RAPORTĄ</button><button id="sh">DALINTIS →</button></div>
+<div id="phr" class="phb"></div><div class="act"><button class="p" id="cp">KOPIJUOTI RAPORTĄ</button><button id="sh">DALINTIS →</button></div>
 <div class="nav"><button id="b2">← Atgal</button><button class="p" id="ed">Redaguoti</button></div></section>
 <section id="v3" class="hide ins"><h2>Instrukcija</h2>
 <h3>Kaip įsidėti programėlę į telefoną (iPhone)</h3>
@@ -151,6 +157,13 @@ label.ch{display:inline-block;margin:0 6px 6px 0}
 <li><b>Jei niekas nepadeda.</b> <b>Settings → Apps → Safari → Clear History and Website Data</b>. <span class='w'>Dėmesio:</span> tai ištrina juodraščius, raportų istoriją ir kitų svetainių duomenis, o programėlę po to reikia atidaryti turint internetą.</li>
 </ol>
 <p><b>Ką reiškia klaidos</b><br><b>User denied Geolocation</b> – programėlei neleista naudoti vietos (žr. 2 ir 3 punktus).<br><b>Timeout expired</b> – per 15 sekundžių nepavyko nustatyti vietos. Išeikite į atvirą vietą ir paspauskite <b>GPS</b> dar kartą.</p>
+<h3 id="iph">Nuotraukos raportuose</h3>
+<p>SITREP, SITUACIJOS RAPORTAS / SITREP, SALUTE, SALTA ir 5W raportų apačioje yra mygtukas <b>Pridėti nuotrauką</b>. Didžiajame SITREP jis yra paskutiniame žingsnyje (D). Juo galima pridėti vieną ar kelias nuotraukas iš telefono.</p>
+<ul>
+<li><b>Pasirinkimas.</b> Paspaudus mygtuką, telefonas pasiūlo nuotraukų galeriją arba kamerą. Pasirinktos nuotraukos rodomos mažais paveikslėliais. Nereikalingą pašalinkite raudonu <b>×</b>.</li>
+<li><b>Siuntimas.</b> Nuotraukos išsiunčiamos kartu su raporto tekstu tik paspaudus <b>Dalintis</b>. Mygtukas <b>Kopijuoti raportą</b> nukopijuoja tik tekstą, be nuotraukų.</li>
+<li><b>Saugojimas.</b> Nuotraukos laikomos tik tol, kol programėlė atidaryta. Uždarius programėlę jos dingsta, o raporto tekstas lieka kaip juodraštis. Mygtukas <b>Išvalyti</b> pašalina ir tekstą, ir nuotraukas.</li>
+</ul>
 <div class="nav"><button id="b3">← Atgal</button></div></section>
 <section id="v4" class="hide"><h2>Istorija</h2><p class="s">Paskutiniai nukopijuoti arba pasidalinti raportai. Saugomi tik šiame telefone.</p><div id="hist"></div>
 <div class="nav"><button id="b4">← Atgal</button><button class="g" id="hclr">Ištrinti istoriją</button></div></section>
@@ -176,7 +189,8 @@ sitrep:{n:"SITREP",d:"Situacijos raportas trumpa versija",fmt:function(v){var g=
 {k:"B",id:"b",gps:1,l:"Dabartinė vieta (koordinatės MGRS)"},
 {k:"C",id:"c",l:"Kas atsitiko",t:"a"},
 {k:"D",id:"d",l:"Kas vyksta dabar / esama padalinio situacija",t:"a"},
-{k:"E",id:"e",l:"Ketinimai",t:"a"}]},
+{k:"E",id:"e",l:"Ketinimai",t:"a"},
+{id:"ph",t:"ph",l:"Nuotraukos"}]},
 salta:{n:"SALTA",d:"Kontakto raportas / SALTA",fmt:function(v){var g=function(k){return v[k]||""};return "Kam: "+g("kam")+"\nNuo ko: "+g("nuo")+"\nDTG: "+g("dtg")+"\nKONTAKTO RAPORTAS / SALTA\nRaporto numeris: "+g("nr")+"\nS : "+g("s")+"\nA : "+g("a")+"\nL : "+g("l")+"\nT : "+g("t")+"\nA : "+g("ad")+"\nBŪTINA PAGALBA: "+g("pg")},f:[
 {id:"kam",l:"Kam (šaukinys)"},
 {id:"nuo",l:"Nuo ko (šaukinys)"},
@@ -187,7 +201,8 @@ salta:{n:"SALTA",d:"Kontakto raportas / SALTA",fmt:function(v){var g=function(k)
 {k:"L",id:"l",gps:1,l:"VIETA (dislokacija, jei yra žinoma)"},
 {k:"T",id:"t",l:"LAIKAS DTG (kontakto laikas)",dt:1},
 {k:"A",id:"ad",l:"DRAUGIŠKŲ PAJĖGŲ VEIKSMAI (kas padaryta ir ketinama)",t:"a"},
-{id:"pg",l:"BŪTINA PAGALBA (kokia reikalinga pagalba)",t:"a"}]},
+{id:"pg",l:"BŪTINA PAGALBA (kokia reikalinga pagalba)",t:"a"},
+{id:"ph",t:"ph",l:"Nuotraukos"}]},
 salute:{n:"SALUTE",d:"Pastebėjimo raportas / SALUTE",fmt:function(v){var g=function(k){return v[k]||""};return "Kam: "+g("kam")+"\nNuo ko: "+g("nuo")+"\nDTG: "+g("dtg")+"\nPASTEBĖJIMO RAPORTAS / SALUTE\nRaporto numeris: "+g("nr")+"\nS : "+g("s")+"\nA : "+g("a")+"\nL : "+g("l")+"\nU : "+g("u")+"\nT : "+g("t")+"\nE : "+g("e")},f:[
 {id:"kam",l:"Kam (šaukinys)"},
 {id:"nuo",l:"Nuo ko (šaukinys)"},
@@ -198,14 +213,15 @@ salute:{n:"SALUTE",d:"Pastebėjimo raportas / SALUTE",fmt:function(v){var g=func
 {k:"L",id:"l",gps:1,l:"Priešo buvimo VIETA"},
 {k:"U",id:"u",l:"Priešo padalinio RŪŠIS"},
 {k:"T",id:"t",l:"Priešo veiksmų DATA ir LAIKAS",dt:1},
-{k:"E",id:"e",l:"Priešo GINKLUOTĖ, EKIPUOTĖ, TECHNIKA",t:"a"}]},
-mist:{n:"MIST",d:"Sužeistojo raportas pagal TCCC kortelę",fmt:function(v){var g=function(k){return v[k]||""};var ck=function(k,b){var t=g(k+"_k");return g(k).split(", ").filter(Boolean).map(function(x){return x==="Kita"&&t?(b===2?"":b?t:"Kita: "+t):x}).filter(Boolean).join(", ")},il=g("i").split(", ").filter(Boolean).map(function(n){var a=((v.iq||"").split("|").filter(function(s){return s.split(";")[0]===n})[0]||"").split(";");var nn=n+(a[3]?" – "+a[3].split(",").join(", ").toLowerCase():"");return a[1]==="1"?nn+" (turniketas"+(a[2]?": "+a[2]+"val.":"")+")":a[1]==="0"?nn+" (turniketas: NE)":nn}).join("; ");var lm=g("i").split(", ").filter(Boolean).filter(function(n){var a=((v.iq||"").split("|").filter(function(s){return s.split(";")[0]===n})[0]||"").split(";");return a[1]==="1"}),tp=g("tq").split(", ").filter(function(x){return x&&x!=="Galūnės"});if(lm.length)tp.unshift(lm.join(", "));else if(g("tq").indexOf("Galūnės")>=0)tp.unshift("Galūnės");var tqt=tp.join(", "),xk=[g("ta").indexOf("Kita")>=0&&g("ta_k"),g("to").indexOf("Kita")>=0&&g("to_k")].filter(Boolean);var rw=function(k,l){var p=(v[k]||"").split("|"),a=[p[0],p[1],({IV:"Į veną",IO:"Į kaulą/kaulų čiulpų ertmę",IM:"Į raumenį",PO:"",IN:"Per nosį"})[p[2]],p[3]&&p[3]+"val"].filter(Boolean).join(" ");return a?(l?l+": ":"")+a:""},j=function(a){return a.filter(Boolean).join("; ")},tl=[j([tqt&&"Turniketas: "+tqt,g("tv")&&"Tvarstymas: "+ck("tv",1)]),ck("ta",2),g("tb"),j([rw("fl","Skysčiai"),rw("bl","Kraujo produktai"),rw("an",""),rw("ab",""),rw("ot","Kita")]),ck("to",2)],tx=tl.filter(Boolean);var P=function(x){return x&&!/[.;]$/.test(x)?x+".":x},E=function(x){return x.replace(/;$/,".")};return "M: "+P(ck("m",1))+"\nI: "+P(il)+"\nS: "+P([g("sp")&&"Pulsas: "+g("sp"),g("rr")&&"Kvėpavimo dažnis: "+g("rr"),g("av")&&"Sąmonė: "+g("av").charAt(0)].filter(Boolean).join(", "))+"\nT:"+E((tx.length||xk.length?" "+tx.join("; ")+(tx.length?".":"")+(xk.length?(tx.length?", ":"")+xk.join(", ")+";":""):""))},f:[
-{k:"M",id:"m",l:"Sužeidimo mechanizmas",t:"c",o:["Šautinis (GSW)","Sprogimas (blast)","Nudegimas (burn)","Buka trauma (blunt)","Kita (other)"]},
-{k:"I",id:"i",l:"Sužeidimo vieta",t:"c",o:["D ranka","K ranka","D koja","K koja","Galva","Kaklas","Krūtinė","Pilvas","Nugara","Dubuo/tarpvietė"]},
+{k:"E",id:"e",l:"Priešo GINKLUOTĖ, EKIPUOTĖ, TECHNIKA",t:"a"},
+{id:"ph",t:"ph",l:"Nuotraukos"}]},
+mist:{n:"MIST",d:"Sužeistojo raportas pagal TCCC kortelę",fmt:function(v){var g=function(k){return v[k]||""};var ck=function(k,b){var t=g(k+"_k");return g(k).split(", ").filter(Boolean).map(function(x){return x==="Kita"&&t?(b===2?"":b?t:"Kita: "+t):x}).filter(Boolean).join(", ")},il=g("i").split(", ").filter(Boolean).map(function(n){var a=((v.iq||"").split("|").filter(function(s){return s.split(";")[0]===n})[0]||"").split(";");var nn=n+(a[3]?" – "+a[3].split(",").join(", ").toLowerCase():"");return a[1]==="1"?nn+" (turniketas"+(a[2]?": "+a[2]+"val.":"")+")":a[1]==="0"?nn+" (turniketas: NE)":nn}).join("; ");var lm=g("i").split(", ").filter(Boolean).filter(function(n){var a=((v.iq||"").split("|").filter(function(s){return s.split(";")[0]===n})[0]||"").split(";");return a[1]==="1"}),tp=g("tq").split(", ").filter(function(x){return x&&x!=="Galūnės"});if(lm.length)tp.unshift(lm.join(", "));else if(g("tq").indexOf("Galūnės")>=0)tp.unshift("Galūnės");var tqt=tp.join(", "),xk=[g("ta").indexOf("Kita")>=0&&g("ta_k"),g("to").indexOf("Kita")>=0&&g("to_k")].filter(Boolean);var rw=function(k,l){var p=(v[k]||"").split("|"),a=[p[0],p[1],({IV:"Į veną",IO:"Į kaulą/kaulų čiulpų ertmę",IM:"Į raumenį",PO:"",IN:"Per nosį"})[p[2]],p[3]&&p[3]+"val"].filter(Boolean).join(" ");return a?(l?l+" - ":"")+a:""},j=function(a){return a.filter(Boolean).join("; ")},tl=[j([tqt&&"Turniketas - "+tqt,g("tv")&&"Tvarstymas - "+ck("tv",1)]),ck("ta",2),g("tb"),j([rw("fl","Skysčiai"),rw("bl","Kraujo produktai"),rw("an",""),rw("ab",""),rw("ot","Kita")]),ck("to",2)],tx=tl.filter(Boolean);var P=function(x){return x&&!/[.;]$/.test(x)?x+".":x},E=function(x){return x.replace(/;$/,".")};return "M: "+P(ck("m",1))+"\nI: "+P(il)+"\nS: "+P([g("sp")&&"Pulsas: "+g("sp"),g("rr")&&"Kvėpavimo dažnis: "+g("rr"),g("av")&&"Sąmonė: "+g("av").charAt(0)].filter(Boolean).join(", "))+"\nT:"+E((tx.length||xk.length?" "+tx.join("; ")+(xk.length?(tx.length?", ":"")+xk.join(", "):"")+".":""))},f:[
+{k:"M",id:"m",l:"Kaip įvyko sužalojimas",t:"c",o:["Šautinis (GSW)","Sprogimas (blast)","Nudegimas (burn)","Buka trauma (blunt)","Kita (other)"]},
+{k:"I",id:"i",l:"Kokie matomi/žinomi sužalojimai",t:"c",o:["D ranka","K ranka","D koja","K koja","Galva","Kaklas","Krūtinė","Pilvas","Nugara","Dubuo/tarpvietė"]},
 {id:"sp",n:1,hd:"Gyvybinės funkcijos",hk:"S",l:"Pulsas (dūžiai/min)",p:"pvz. 110"},
 {id:"rr",n:1,l:"Kvėpavimo dažnis (kv./min)",p:"pvz. 18"},
 {id:"av",l:"Sąmonė (AVPU)",t:"s",o:["A – budrus","V – reaguoja į balsą","P – reaguoja į skausmą","U – nereaguoja"]},
-{hd:"Teikta pagalba",id:"tq",l:"„C“ – Turniketas (TQ)",t:"c",o:["Galūnės","Jungties (junctional)"]},
+{hd:"Kokia pagalba jau suteikta",id:"tq",l:"„C“ – Turniketas (TQ)",t:"c",o:["Galūnės","Jungties (junctional)"]},
 {id:"tv",l:"„C“ – Tvarstymas (dressing)",t:"c",o:["Hemostatinis","Spaudžiamasis","Kita (other)"]},
 {id:"ta",l:"A – Kvėpavimo takai",t:"c",o:["Nazofar. (NPA)","I-gel","Kriko. (CRIC)","Kita (other)"]},
 {id:"tb",l:"B – Kvėpavimas",t:"c",o:["Okliuzinis tvarstis (chest seal)","Ad. dekompresija (needle)","O₂","Krūtinės vamz. (chest tube)"]},
@@ -221,7 +237,7 @@ R.sitrepk={n:"SITUACIJOS RAPORTAS / SITREP",d:"Kovinės galios ir situacijos rap
 {l:"A — KOVINĖ GALIA",g:[{id:"a1",t:"b",l:"Personalas",o:["Žalia >80 %","Geltona 60–80 %","Raudona 40–60 %","Nepajėgūs <40 %"]},{id:"a2",t:"b",l:"Ekipuotė, įranga",o:["Žalia >80 %","Geltona 60–80 %","Raudona 40–60 %","Nepajėgūs <40 %"]},{id:"a3",t:"b",l:"Bendras įvertinimas",o:["Žalia >80 %","Geltona 60–80 %","Raudona 40–60 %","Nepajėgūs <40 %"]}]},
 {l:"B — PRIEŠIŠKŲ PAJĖGŲ SITUACIJA",g:[{id:"b1",t:"a",l:"1 — Veiksmai per praeitą laikotarpį"},{id:"b2",t:"a",l:"2 — Priešo padalinių buvimo vieta"},{id:"b3",t:"a",l:"3 — Galimas priešo pajėgų VEV"}]},
 {l:"C — SAVO PAJĖGŲ SITUACIJA",g:[{id:"c1",t:"a",l:"1 — Veiksmai per praeitą laikotarpį"},{id:"c2",t:"a",l:"2 — Savo pajėgų buvimo vieta"},{id:"c3",t:"a",l:"3 — Planuojami veiksmai"}]},
-{l:"D — VADO VERTINIMAS",g:[{id:"d",t:"a",l:"Vado vertinimas"}]}]};
+{l:"D — VADO VERTINIMAS",g:[{id:"d",t:"a",l:"Vado vertinimas"},{id:"ph",t:"ph",l:"Nuotraukos"}]}]};
 function psit(t){var m={"kam":"kam","nuo ko":"nuo","pranešimo būdas":"pb","slaptumo kategorija":"sk","prioritetas":"pr","raporto numeris":"nr"},sec="",last="",o={},n=0,cl=function(x){x=x.trim();return /^[-–—]*$/.test(x)?"":x};
  t.split(/\r?\n/).forEach(function(l){l=l.trim();var a;
   if(a=l.match(/^([ABCD])\s*[:–—-]\s*(.*)$/)){sec=a[1].toLowerCase();last="";n++;if(sec==="d"){o.d=cl(a[2]);last="d"}return}
@@ -237,7 +253,8 @@ R.w5={n:"5W",d:"Taktinis 5W raportas",fmt:function(v){var g=function(k){return (
 {k:"WHAT",id:"what",t:"a",l:"Ką veikia / kas įvyko?",p:"pvz. priešas juda kolonoje, greitis apie 40 km/h"},
 {k:"WHERE",id:"where",t:"a",gps:1,l:"Kur? Koordinatės (MGRS), orientyrai",p:"pvz. kelyje A-12, prie miško pakraščio"},
 {k:"WHEN",id:"when",dt:1,l:"Kada? Laikas (DTG)"},
-{k:"WHY",id:"why",t:"a",l:"Kodėl / koks tikslas?",p:"pvz. tikėtina, priešas ruošiasi užimti gynybines pozicijas"}]};
+{k:"WHY",id:"why",t:"a",l:"Kodėl / koks tikslas?",p:"pvz. tikėtina, priešas ruošiasi užimti gynybines pozicijas"},
+{id:"ph",t:"ph",l:"Nuotraukos"}]};
 R.medevac={n:"9-LINER MEDEVAC",d:"Sužeistųjų evakuacijos raportas",wiz:1,fmt:function(v){var o=["9-LINER MEDEVAC"];for(var i=1;i<10;i++)o.push(i+". "+(v["l"+i]||"-"));return o.join("\n")},f:[
 {id:"l1",gps:1,l:"Surinkimo vietos koordinatės",p:"Įveskite koordinates (MGRS)"},
 {id:"l2",t:"a",l:"Surinkimo vietos dažnis, šaukinys, slaptažodis",p:"Pvz. dažnis, šaukinys, slaptažodis"},
@@ -265,16 +282,17 @@ function mgrs(lat,lon){
  var row="ABCDEFGHJKLMNPQRSTUV".charAt((Math.floor(y/100000)+(z%2===0?5:0))%20);
  var P=function(v){return String(Math.floor(v%100000)).padStart(5,"0")};
  return z+b+col+row+" "+P(x)+" "+P(y)}
-var VER="27 · 2026-11-10",D={},CS={},NR={},H=[];
+var PH={};function drawP(id,ed){var c=$(id),fs=PH[cur]||[];if(!c)return;c.innerHTML=fs.map(function(f,j){return "<span><img src='"+URL.createObjectURL(f)+"' alt=''>"+(ed?"<button type='button' data-pd='"+j+"' aria-label='Pašalinti'>×</button>":"")+"</span>"}).join("")+(!ed&&fs.length?"<p>Nuotraukų: "+fs.length+". Jos siunčiamos tik per „Dalintis“, kopijuojant jos nepridedamos.</p>":"");c.onclick=function(e){var b=e.target.closest("[data-pd]");if(b){PH[cur].splice(+b.dataset.pd,1);drawP(id,ed)}}}
+var VER="28 · 2026-11-11",D={},CS={},NR={},H=[];
 var RQ={sitrep:["kam","nuo","nr","a","b"],sitrepk:["kam","nuo","dtg","nr"],salute:["kam","nuo","dtg","l"],salta:["kam","nuo","dtg","l"],w5:["who","what","where","when","why"],medevac:["l1","l2","l3"],mist:["m","i"],kilimo:["k1","k2","k3","k5"]};
 function flat(k){return [].concat.apply([],R[k].f.map(function(x){return x.g||[x]}))}
 function has(k,id){return flat(k).some(function(f){return f.id===id})}
 function persist(){try{localStorage.setItem("rp2",JSON.stringify({d:D,cs:CS,nr:NR,h:H}))}catch(e){}}
-function save(){if(!cur)return;D[cur]={ms:MS,mi:mi};if(has(cur,"kam")){if(V.kam)CS.kam=V.kam;if(V.nuo)CS.nuo=V.nuo}persist()}
+function save(){if(!cur)return;D[cur]={ms:MS,mi:mi};if(has(cur,"kam")){CS.kam=V.kam||"";CS.nuo=V.nuo||""}persist()}
 function load(){try{var s=JSON.parse(localStorage.getItem("rp2")||"null");if(s){D=s.d||{};CS=s.cs||{};NR=s.nr||{};H=s.h||[]}else{var o=JSON.parse(localStorage.getItem("rp")||"null");if(o&&o.c&&R[o.c]){D[o.c]={ms:o.ms&&o.ms.length?o.ms:[o.v||{}],mi:o.mi||0};persist()}}}catch(e){}}
-function fresh(k){var v={};if(has(k,"kam")){if(CS.kam)v.kam=CS.kam;if(CS.nuo)v.nuo=CS.nuo}if(has(k,"nr")&&/^\d+$/.test(NR[k]||""))v.nr=String(+NR[k]+1);return v}
+function fresh(k){var v={};if(has(k,"kam")){v.kam=CS.kam||"";v.nuo=CS.nuo||""}if(has(k,"nr")&&/^\d+$/.test(NR[k]||""))v.nr=String(+NR[k]+1);return v}
 function dirty(k){var d=D[k];return !!d&&(d.ms||[]).some(function(o){return Object.keys(o).some(function(x){return o[x]&&["kam","nuo","nr","prev"].indexOf(x)<0})})}
-function openR(k){cur=k;var d=D[k];if(d&&d.ms&&d.ms.length&&d.ms.some(function(o){return Object.keys(o).some(function(x){return o[x]})})){MS=d.ms;mi=Math.min(d.mi||0,MS.length-1);V=MS[mi]}else{V=fresh(k);MS=[V];mi=0}st=0;build();show(1)}
+function openR(k){cur=k;var d=D[k];if(d&&d.ms&&d.ms.length&&d.ms.some(function(o){return Object.keys(o).some(function(x){return o[x]})})){MS=d.ms;mi=Math.min(d.mi||0,MS.length-1);V=MS[mi]}else{V=fresh(k);MS=[V];mi=0}if(has(k,"kam"))MS.forEach(function(o){o.kam=CS.kam||"";o.nuo=CS.nuo||""});st=0;build();show(1)}
 function miss(){var fl=flat(cur),out=[];MS.forEach(function(o,j){(RQ[cur]||[]).forEach(function(id){if(!(o[id]||"").trim()){var f=fl.filter(function(x){return x.id===id})[0];if(f)out.push((MS.length>1?"MIST "+(j+1)+": ":"")+(f.hk||f.k?(f.hk||f.k)+" – ":"")+(f.hd||f.l).replace(/\s*\([^)]*\)/g,""))}})});return out}
 function hadd(t){if(!cur||!t.trim())return;if(V.nr&&has(cur,"nr"))NR[cur]=V.nr;if(!(H[0]&&H[0].t===t&&H[0].k===cur)){H.unshift({k:cur,t:t,d:now(),ms:JSON.parse(JSON.stringify(MS))});H=H.slice(0,10)}persist()}
 function drawH(){var q=function(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;")};$("hist").innerHTML=H.length?H.map(function(e,j){return "<details><summary><b>"+(R[e.k]?R[e.k].n:e.k)+"</b><small>"+e.d+"</small></summary><pre>"+q(e.t)+"</pre><div class='act'><button type='button' data-hc='"+j+"'>Kopijuoti</button><button type='button' data-hu='"+j+"'>Naudoti kaip pagrindą</button></div></details>"}).join(""):"<p class='s'>Istorija tuščia.</p>";$("hclr").classList.toggle("hide",!H.length)}
@@ -291,13 +309,15 @@ function build(){
   else if(f.t==="p"){el="<textarea id='"+id+"' placeholder='"+(f.p||"")+"'></textarea><button type='button' data-ps='"+id+"' style='width:100%;margin-top:8px;background:rgba(200,217,74,.28);border-color:rgba(200,217,74,.45);color:var(--tx)'>"+f.bt+"</button><div id='psm' style='color:var(--mu);font-size:13px;margin-top:6px'></div>"}
   else if(f.t==="c"){var sv=val.split(", "),kt=V[f.id+"_k"]||"",ex=function(o){return o.replace(/\s*\([^)]*\)/g,"")};el="<div id='"+id+"'>"+f.o.map(function(o){var vv=ex(o);var on=sv.indexOf(vv)>=0,isk=vv==="Kita";return "<label class='ch'"+(isk&&on?" style='display:none'":"")+"><input type='checkbox' value='"+vv+"'"+(on?" checked":"")+"><span>"+o+"</span></label>"+(isk?"<input class='ko' id='"+id+"_k' placeholder='Kita (other)' value='"+kt.replace(/'/g,"&#39;")+"'"+(on?"":" style='display:none'")+">":"")+(f.id==="i"&&vv==="K koja"?"<br>":"")}).join("")+"</div>"+(f.id==="i"?"<div id='tqx'></div>":"")}
   else if(f.t==="s"){el="<select id='"+id+"'><option value=''>–</option>"+f.o.map(function(o){return "<option"+(o===val?" selected":"")+">"+o+"</option>"}).join("")+"</select>"}
-  else if(f.t==="a"){el="<textarea id='"+id+"' placeholder='"+(f.p||"")+"'>"+val.replace(/</g,"&lt;")+"</textarea>"+(f.gps?"<button type='button' data-gps='"+id+"' style='margin-top:8px'>GPS</button>":"")}
+  else if(f.t==="a"){el="<textarea id='"+id+"' placeholder='"+(f.p||"")+"'"+(f.gps?" style='flex:1;min-width:0'":"")+">"+val.replace(/</g,"&lt;")+"</textarea>";if(f.gps)el="<div style='display:flex;gap:8px;align-items:flex-start'>"+el+"<button type='button' data-gps='"+id+"' style='flex:none'>GPS</button></div>"}
   else if(f.gps){el="<div class='row'><input id='"+id+"' placeholder='"+(f.p||"")+"' value='"+val.replace(/'/g,"&#39;")+"'><button type='button' data-gps='"+id+"'>GPS</button></div>"}
   else if(f.dt){el="<div class='row'><input id='"+id+"' placeholder='DD HHMMB MMM YY' value='"+val+"'><button type='button' data-now='"+id+"'>Dabar</button></div>"}
+  else if(f.t==="ph"){el="<div id='ph_box' class='phb'></div><input type='file' id='ph_in' accept='image/*' multiple style='display:none'><button type='button' id='ph_btn' style='width:100%;border-color:rgba(200,217,74,.45)'>Pridėti nuotrauką</button>"}
   else{el="<input id='"+id+"'"+(f.n?" inputmode='numeric'":"")+" placeholder='"+(f.p||"")+"' value='"+val.replace(/'/g,"&#39;")+"'>"}
   h+=lab+el});
  if(cur==="mist"){var tb="";if(MS.length>1){tb="<div class='mt' style='margin-bottom:12px'>"+MS.map(function(_,j){return "<span style='display:inline-flex;margin:0 6px 6px 0'><button type='button' class='"+(j===mi?"p":"")+"' data-mi='"+j+"' style='padding:8px 12px;border-radius:8px 0 0 8px'>MIST "+(j+1)+"</button><button type='button' data-del='"+j+"' aria-label='Ištrinti' style='padding:8px 10px;border-radius:0 8px 8px 0;border-left:0;color:#ff4d4d;font-weight:700"+(dj===j?";background:#c0392b;color:#fff":"")+"'>"+(dj===j?"Ištrinti?":"×")+"</button></span>"}).join("")+"</div>"}h=tb+h+"<button type='button' id='addm' style='width:100%;margin-top:22px;display:flex;justify-content:space-between;align-items:center'>Pridėti MIST "+(MS.length+1)+"<span style='font-size:26px;line-height:1;color:var(--ac);font-weight:700'>+</span></button>"}
  $("form").className=cur==="mist"?"mist":cur==="salta"||cur==="salute"||cur==="w5"?"salta":"";$("form").innerHTML=h;
+ if($("ph_btn")){$("ph_btn").onclick=function(){$("ph_in").click()};$("ph_in").onchange=function(){PH[cur]=(PH[cur]||[]).concat([].slice.call(this.files));this.value="";drawP("ph_box",1)};drawP("ph_box",1)}
  $("form").querySelectorAll("[data-ps]").forEach(function(b){b.onclick=function(){var pf=grp.filter(function(x){return x.t==="p"})[0],o=pf.ps($(b.dataset.ps).value);if(!o){$("psm").textContent=pf.er;return}collect();for(var k in o)V[k]=o[k];V.prev="";save();build();$("psm").innerHTML=pf.ok}});
  $("form").querySelectorAll("[data-now]").forEach(function(b){b.onclick=function(){$(b.dataset.now).value=now()}});
  $("form").querySelectorAll("[data-mi]").forEach(function(b){b.onclick=function(){collect();dj=-1;mi=+b.dataset.mi;V=MS[mi];save();build();window.scrollTo(0,0)}});
@@ -320,14 +340,16 @@ function text(){
   o.push(pre+f.l+": "+v)});
  return o.join("\n")}
 var L=$("list");
-function drawL(){L.innerHTML="";["sitrep","sitrepk","salute","salta","w5","medevac","mist","kilimo"].forEach(function(k){var b=document.createElement("button");b.className="card";b.innerHTML=(dirty(k)?"<i class='bdg' style='font-style:normal'>juodraštis</i>":"")+"<b>"+R[k].n+"</b><span>"+R[k].d+"</span>";b.onclick=function(){openR(k)};L.appendChild(b)});$("hl").textContent="Išsiųstų raportų istorija"+(H.length?" ("+H.length+")":"");$("ver").textContent="Versija "+VER}
+function drawL(){L.innerHTML="";["sitrep","sitrepk","salute","salta","w5","medevac","mist","kilimo"].forEach(function(k){var b=document.createElement("button");b.className="card";b.innerHTML=(dirty(k)?"<i class='bdg' style='font-style:normal'>juodraštis</i>":"")+"<b>"+R[k].n+"</b><span>"+R[k].d+"</span>";b.onclick=function(){openR(k)};L.appendChild(b)});$("hl").textContent="Išsiųstų raportų istorija"+(H.length?" ("+H.length+")":"");$("ver").textContent="Versija "+VER;$("hk").value=CS.kam||"";$("hn").value=CS.nuo||""}
 $("b1").onclick=function(){collect();if(R[cur].wiz&&st>0){st--;build();window.scrollTo(0,0)}else show(0)};
-$("n1").onclick=function(){dj=-1;collect();if(R[cur].wiz&&st<R[cur].f.length-1){st++;build();window.scrollTo(0,0);return}$("out").textContent=text();$("out").contentEditable="false";$("ed").textContent="Redaguoti";show(2)};
+$("n1").onclick=function(){dj=-1;collect();if(R[cur].wiz&&st<R[cur].f.length-1){st++;build();window.scrollTo(0,0);return}$("out").textContent=text();$("out").contentEditable="false";$("ed").textContent="Redaguoti";drawP("phr",0);show(2)};
 $("b2").onclick=function(){show(1)};
 $("ins").onclick=function(e){e.preventDefault();show(3)};
+$("inp").onclick=function(e){e.preventDefault();show(3);$("iph").scrollIntoView()};
 $("b3").onclick=function(){show(0)};
 $("clr").onclick=function(){if(!$("v1").classList.contains("hide"))collect();show(0)};
-var wt=0;$("wipe").onclick=function(){var b=this;delete D[cur];delete NR[cur];CS={};V={};MS=[V];mi=0;st=0;dj=-1;persist();build();show(1);clearTimeout(wt);b.textContent="Išvalyta ✓";b.classList.add("ok");wt=setTimeout(function(){b.textContent="Išvalyti";b.classList.remove("ok")},1500)};
+var wt=0;$("wipe").onclick=function(){var b=this;delete D[cur];delete PH[cur];delete NR[cur];V=fresh(cur);MS=[V];mi=0;st=0;dj=-1;persist();build();show(1);clearTimeout(wt);b.textContent="Išvalyta ✓";b.classList.add("ok");wt=setTimeout(function(){b.textContent="Išvalyti";b.classList.remove("ok")},1500)};
+$("hk").oninput=function(){CS.kam=this.value.trim();persist()};$("hn").oninput=function(){CS.nuo=this.value.trim();persist()};
 $("hl").onclick=function(e){e.preventDefault();drawH();show(4)};
 $("b4").onclick=function(){show(0)};
 var ht=0;$("hclr").onclick=function(){var b=this;if(!ht){b.textContent="Tikrai ištrinti?";b.style.color="#ff4d4d";ht=setTimeout(function(){ht=0;b.textContent="Ištrinti istoriją";b.style.color=""},3000);return}clearTimeout(ht);ht=0;b.textContent="Ištrinti istoriją";b.style.color="";H=[];persist();drawH()};
@@ -338,7 +360,7 @@ $("cp").onclick=function(){var t=$("out").innerText,b=$("cp");hadd(t);
  function ok(){b.textContent="NUKOPIJUOTA ✓";setTimeout(function(){b.textContent="KOPIJUOTI RAPORTĄ"},1800)}
  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fb)}else fb();
  function fb(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(e){}a.remove()}};
-$("sh").onclick=function(){var t=$("out").innerText;if(navigator.share){hadd(t);navigator.share({text:t}).catch(function(){})}else{$("cp").click()}};
+$("sh").onclick=function(){var t=$("out").innerText;if(navigator.share){hadd(t);var sd={text:t},fs=PH[cur]||[];if(fs.length&&navigator.canShare&&navigator.canShare({files:fs}))sd.files=fs;navigator.share(sd).catch(function(){})}else{$("cp").click()}};
 $("v3").addEventListener("click",function(e){var b=e.target.closest(".cpy");if(!b)return;var t=b.dataset.c,sp=b.querySelector("span");
  function ok(){sp.textContent="✓ nukopijuota";setTimeout(function(){sp.textContent="⧉ kopijuoti"},1800)}
  function fb(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");ok()}catch(x){}a.remove()}
