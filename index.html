@@ -12,35 +12,45 @@
 <link rel="apple-touch-icon" href="wolf-180.png">
 <title>Raportai v2</title>
 <style>
-:root{color-scheme:dark;--bg:#111;--card:#1b1b1b;--line:#2e2e2e;--tx:#eee;--mu:#999;--ac:#c8d94a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{color-scheme:dark;--bg:#111;--card:#1b1b1b;--line:#2e2e2e;--tx:#eee;--mu:#999;--ac:#c8d94a;--pb:#c8d94a;--af:rgba(200,217,74,.28);--al:rgba(200,217,74,.6);--wr:#ff8a8a;--sw:#3a3a3c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root.light{color-scheme:light;--bg:#fff;--card:#f3f3f0;--line:#c9c9c4;--tx:#111;--mu:#5c5c5c;--ac:#5f6b00;--af:rgba(170,190,40,.32);--al:rgba(95,107,0,.7);--wr:#b3261e;--sw:#bdbdb8}
+:root.tac{color-scheme:dark;--bg:#000;--card:#030603;--line:#1c5226;--tx:#5dff7a;--mu:#3cb556;--ac:#5dff7a;--pb:transparent;--af:rgba(93,255,122,.13);--al:rgba(93,255,122,.85);--wr:#ff6b6b;--sw:#0f3317}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 main{max-width:640px;margin:0 auto;padding:16px}
 header{position:relative;height:0}
 #hb{position:absolute;right:0;top:0;display:flex;gap:8px}
-#wipe.ok{color:var(--tx);background:rgba(200,217,74,.28);border-color:rgba(200,217,74,.6)}
-#hb button:active{background:rgba(200,217,74,.28)}
-#v1>h2,#v2>h2,#v3>h2,#v4>h2{padding-right:84px;min-height:33px;display:flex;align-items:center}
+#wipe.ok{color:var(--tx);background:var(--af);border-color:var(--al)}
+#hb button:active{background:var(--af)}
+#v1>h2,#v2>h2,#v3>h2,#v4>h2,#v5>h2{padding-right:84px;min-height:33px;display:flex;align-items:center}
 #v1>h2,#v2>h2{padding-right:164px}
 h1{font-size:20px;letter-spacing:.15em;margin:0}
 h2{font-size:18px;margin:0 0 4px}
 p.s{color:var(--mu);margin:0 0 16px}
 button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--tx);padding:12px 16px}
-button.p{background:var(--ac);color:#111;border-color:var(--ac)}
-button.p[data-mi]{background:rgba(200,217,74,.28);color:var(--tx);border-color:rgba(200,217,74,.6)}
+button.p{background:var(--pb);color:#111;border-color:var(--pb)}
+.tac button.p{color:var(--tx);border-color:var(--tx);border-width:2px}
+.tac .sw .tr::after{background:var(--tx)}
+.tac input,.tac textarea,.tac select{color:var(--tx)}
+button.p[data-mi]{background:var(--af);color:var(--tx);border-color:var(--al)}
 button.g{padding:6px 12px;font-size:13px;color:var(--mu)}
 .card{display:block;width:100%;text-align:left;margin-bottom:10px;padding:16px}
 .card b{display:block;letter-spacing:.05em}
 .card span{color:var(--mu);font-size:14px}
-.card .bdg{float:right;margin-top:2px;padding:2px 8px;border-radius:999px;font-size:12px;color:var(--tx);background:rgba(200,217,74,.28);border:1px solid rgba(200,217,74,.6)}
+.sh{font-size:15px;margin:22px 0 6px}
+.opt{display:block;width:100%;text-align:left;margin:0 0 8px;padding:12px}
+.opt small{display:block;color:var(--mu);font-size:13px;line-height:1.4;margin-top:3px}
+.opt.on{background:var(--af);border-color:var(--al)}
+#tho .opt{margin:0;text-align:center;flex:1;padding:12px 6px}
+.card .bdg{float:right;margin-top:2px;padding:2px 8px;border-radius:999px;font-size:12px;color:var(--tx);background:var(--af);border:1px solid var(--al)}
 .phb{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
 .phb:empty{margin:0}
 .phb span{position:relative;line-height:0}
 .phb img{width:76px;height:76px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
 .phb span button{position:absolute;top:-6px;right:-6px;width:24px;height:24px;padding:0;border-radius:50%;line-height:1;color:#ff4d4d;font-weight:700;background:var(--bg)}
 .phb p{flex-basis:100%;margin:0;font-size:13px;line-height:1.4;color:var(--mu)}
-#warn:not(:empty){margin:0 0 10px;padding:10px 12px;border:1px solid #c0392b;border-radius:8px;color:#ff8a8a;font-size:14px}
+#warn:not(:empty){margin:0 0 10px;padding:10px 12px;border:1px solid #c0392b;border-radius:8px;color:var(--wr);font-size:14px}
 #hist details{border:1px solid var(--line);border-radius:8px;background:var(--card);margin-bottom:10px;padding:0 12px}
 #hist summary{padding:12px 0;cursor:pointer}
 #hist summary small{color:var(--mu);margin-left:6px}
@@ -66,19 +76,19 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--card);border:1px
 .cr output{display:inline-block;width:46px;text-align:center;font-weight:700;font-size:20px}
 .tg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .tg button{padding:16px 10px}
-.tg button.on{background:rgba(200,217,74,.28);color:var(--tx);border-color:rgba(200,217,74,.6)}
+.tg button.on{background:var(--af);color:var(--tx);border-color:var(--al)}
 .rw{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .ac{border:1px solid var(--line);border-radius:8px;margin:14px 0 0;background:var(--card)}
 .ac summary{padding:12px;cursor:pointer;font-weight:400;color:var(--mu)}
 .ac .rw{padding:0 12px 12px}
-.lb{margin:12px 0;display:block;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}
+.lb{margin:12px 0;display:block;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
 .lh{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .lh label.ch{margin:0}
 .lb label.sw,label.sw{display:flex;align-items:center;gap:10px;margin:0;padding:0;color:var(--tx);font-size:14px;cursor:pointer}
 .sw input{display:none}
-.sw .tr{width:52px;height:30px;border-radius:999px;background:#3a3a3c;position:relative;transition:background .2s;flex:none}
+.sw .tr{width:52px;height:30px;border-radius:999px;background:var(--sw);position:relative;transition:background .2s;flex:none}
 .sw .tr::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:transform .2s}
-.sw input:checked+.tr{background:rgba(200,217,74,.28);box-shadow:inset 0 0 0 1px rgba(200,217,74,.6)}
+.sw input:checked+.tr{background:var(--af);box-shadow:inset 0 0 0 1px var(--al)}
 .lb .sw input:checked+.tr{background:rgba(214,69,69,.38);box-shadow:inset 0 0 0 1px rgba(214,69,69,.75)}
 .sw input:checked+.tr::after{transform:translateX(22px)}
 .lt{display:flex;gap:8px;margin:10px 0 0}
@@ -86,18 +96,18 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--card);border:1px
 .lb .ics:empty{margin:0}
 .lb .ij{margin-top:10px}
 .lb button{padding:8px 14px}
-.lb button.on{background:rgba(200,217,74,.28);color:var(--tx);border-color:rgba(200,217,74,.6)}
+.lb button.on{background:var(--af);color:var(--tx);border-color:var(--al)}
 .lb .tm{width:130px}
 .lb b{font-weight:600;font-size:14px;font-family:inherit}
-.ko{display:inline-block;width:190px;max-width:100%;padding:8px 12px;margin:0 6px 6px 0;vertical-align:top;border-color:rgba(200,217,74,.6)}
+.ko{display:inline-block;width:190px;max-width:100%;padding:8px 12px;margin:0 6px 6px 0;vertical-align:top;border-color:var(--al)}
 a{color:var(--ac)}
 .ins{font-size:15px;line-height:1.5}
 .ins ol,.ins ul{padding-left:24px;margin:0}
 .ins li{margin:0 0 12px;padding-left:2px}
 .ins p{margin:0 0 14px}
-.ins h3{font-size:16px;line-height:1.3;margin:24px 0 12px;padding:8px 12px;border-radius:8px;background:rgba(200,217,74,.28);border:1px solid rgba(200,217,74,.6)}
-.ins .w{color:#ff8a8a;font-weight:700}
-.cpy{display:inline-block;margin:6px 0 2px;padding:6px 10px;font-weight:600;font-size:15px;text-align:left;background:rgba(200,217,74,.28);border-color:rgba(200,217,74,.6);color:var(--tx)}
+.ins h3{font-size:16px;line-height:1.3;margin:24px 0 12px;padding:8px 12px;border-radius:8px;background:var(--af);border:1px solid var(--al)}
+.ins .w{color:var(--wr);font-weight:700}
+.cpy{display:inline-block;margin:6px 0 2px;padding:6px 10px;font-weight:600;font-size:15px;text-align:left;background:var(--af);border-color:var(--al);color:var(--tx)}
 .cpy span{font-weight:400;font-size:12px;color:var(--ac);margin-left:6px;white-space:nowrap}
 .mist input,.mist select,.mist textarea,.mist option,.mist .lb button,.mist .ac input::placeholder{font-size:16px;font-family:inherit}
 .mist summary{font-size:13px}
@@ -111,13 +121,13 @@ a{color:var(--ac)}
 label.ch{display:inline-block;margin:0 6px 6px 0}
 .ch input{display:none}
 .ch span{display:inline-block;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--tx);font-size:14px;cursor:pointer}
-.ch input:checked+span{background:rgba(200,217,74,.28);color:var(--tx);border-color:rgba(200,217,74,.6)}
+.ch input:checked+span{background:var(--af);color:var(--tx);border-color:var(--al)}
 </style>
 </head>
 <body>
 <main>
-<header><div id="hb"><button class="g hide" id="wipe">Išvalyti</button><button class="g hide" id="clr">Grįžti</button></div></header>
-<section id="v0"><h1 style="margin:0 0 14px">RAPORTAI</h1><div class="rw" style="margin:0 0 18px"><div><label for="hk" style="margin-top:0">Kam (šaukinys)</label><input id="hk" autocapitalize="characters"></div><div><label for="hn" style="margin-top:0">Nuo ko (šaukinys)</label><input id="hn" autocapitalize="characters"></div></div><div id="list"></div><p style="margin:20px 0 0;font-size:13px"><a href="#" id="hl" style="color:var(--mu)">Išsiųstų raportų istorija</a></p><p style="margin:12px 0 0;font-size:13px"><a href="#" id="ins" style="color:var(--mu)">Kaip pridėti prie pradžios ekrano (iPhone, Android)</a></p><p style="margin:-2px 0 0;font-size:13px"><a href="#" id="inp" style="color:var(--mu)">Kaip pridėti nuotrauką prie raporto</a></p><p id="ver" style="margin:22px 0 0;font-size:12px;color:var(--mu)"></p></section>
+<header><div id="hb"><button class="g" id="set">Nustatymai</button><button class="g hide" id="wipe">Išvalyti</button><button class="g hide" id="clr">Grįžti</button></div></header>
+<section id="v0"><h1 style="margin:0 0 18px;min-height:33px;display:flex;align-items:center">RAPORTAI</h1><div id="list"></div><p style="margin:20px 0 0;font-size:13px"><a href="#" id="hl" style="color:var(--mu)">Išsiųstų raportų istorija</a></p><p style="margin:12px 0 0;font-size:13px"><a href="#" id="ins" style="color:var(--mu)">Kaip pridėti prie pradžios ekrano (iPhone, Android)</a></p><p style="margin:-2px 0 0;font-size:13px"><a href="#" id="inp" style="color:var(--mu)">Kaip pridėti nuotrauką prie raporto</a></p><p id="ver" style="margin:12px 0 0;font-size:12px;color:var(--mu)"></p></section>
 <section id="v1" class="hide"><h2 id="t1"></h2><p class="s" id="d1"></p><div id="form"></div>
 <div class="nav"><button id="b1">← Atgal</button><button class="p" id="n1">Toliau →</button></div></section>
 <section id="v2" class="hide"><h2>Patikrinkite raportą</h2><p class="s">Jei viskas teisinga, nukopijuokite arba dalinkitės tekstu.</p><div id="warn"></div><pre id="out"></pre>
@@ -158,7 +168,7 @@ label.ch{display:inline-block;margin:0 6px 6px 0}
 </ol>
 <p><b>Ką reiškia klaidos</b><br><b>User denied Geolocation</b> – programėlei neleista naudoti vietos (žr. 2 ir 3 punktus).<br><b>Timeout expired</b> – per 15 sekundžių nepavyko nustatyti vietos. Išeikite į atvirą vietą ir paspauskite <b>GPS</b> dar kartą.</p>
 <h3 id="iph">Nuotraukos raportuose</h3>
-<p>SITREP, SITUACIJOS RAPORTAS / SITREP, SALUTE, SALTA ir 5W raportų apačioje yra mygtukas <b>Pridėti nuotrauką</b>. Didžiajame SITREP jis yra paskutiniame žingsnyje (D). Juo galima pridėti vieną ar kelias nuotraukas iš telefono.</p>
+<p>SITREP, SITUACIJOS RAPORTAS / SITREP, SALUTE, SALTA, 5W ir DRONREP raportų apačioje yra mygtukas <b>Pridėti nuotrauką</b>. Didžiajame SITREP jis yra paskutiniame žingsnyje (D). Juo galima pridėti vieną ar kelias nuotraukas iš telefono.</p>
 <ul>
 <li><b>Pasirinkimas.</b> Paspaudus mygtuką, telefonas pasiūlo nuotraukų galeriją arba kamerą. Pasirinktos nuotraukos rodomos mažais paveikslėliais. Nereikalingą pašalinkite raudonu <b>×</b>.</li>
 <li><b>Siuntimas.</b> Nuotraukos išsiunčiamos kartu su raporto tekstu tik paspaudus <b>Dalintis</b>. Mygtukas <b>Kopijuoti raportą</b> nukopijuoja tik tekstą, be nuotraukų.</li>
@@ -167,6 +177,22 @@ label.ch{display:inline-block;margin:0 6px 6px 0}
 <div class="nav"><button id="b3">← Atgal</button></div></section>
 <section id="v4" class="hide"><h2>Istorija</h2><p class="s">Paskutiniai nukopijuoti arba pasidalinti raportai. Saugomi tik šiame telefone.</p><div id="hist"></div>
 <div class="nav"><button id="b4">← Atgal</button><button class="g" id="hclr">Ištrinti istoriją</button></div></section>
+<section id="v5" class="hide"><h2>Nustatymai</h2>
+<details class="ac" id="csd" style="margin:14px 0 0"><summary>Šaukiniai<span id="hs" style="margin-left:8px;color:var(--tx)"></span></summary>
+<p class="s" style="margin-top:0">Čia įrašyti šaukiniai automatiškai atsiranda visuose raportuose, kuriuose yra laukai „Kam“ ir „Nuo ko“. Pakeitus čia, pasikeičia ir raportuose.</p>
+<div class="rw"><div><label for="hk" style="margin-top:0">Kam (šaukinys)</label><input id="hk" autocapitalize="characters"></div><div><label for="hn" style="margin-top:0">Nuo ko (šaukinys)</label><input id="hn" autocapitalize="characters"></div></div></details>
+<details class="ac" id="tzd" style="margin:10px 0 0"><summary>Laiko zona<span id="tzs" style="margin-left:8px;color:var(--tx)"></span></summary>
+<p class="s" style="margin-top:0">Raidė, kuri rašoma prie laiko (DTG), ir pagal kurią juostą skaičiuojamas laikas. Dabar būtų įrašyta: <b id="tzx"></b></p>
+<div id="tzo">
+<button type="button" class="opt" data-tz="A">Automatiškai (B žiemą, C vasarą)<small>Lietuvos laikas su tikslia juostos raide. Raidė pasikeičia pati, kai persukamas laikas.</small></button>
+<button type="button" class="opt" data-tz="J">J – Juliet (vietinis laikas)<small>Lietuvos laikrodžio laikas, juosta nenurodoma. Skaitytojas pats turi žinoti, kurioje juostoje esate.</small></button>
+<button type="button" class="opt" data-tz="B">B – Bravo (UTC+2)<small>Lietuvos žiemos laikas. Laikas visada skaičiuojamas pagal UTC+2, net ir vasarą.</small></button>
+<button type="button" class="opt" data-tz="C">C – Charlie (UTC+3)<small>Lietuvos vasaros laikas. Laikas visada skaičiuojamas pagal UTC+3, net ir žiemą.</small></button>
+</div></details>
+<h3 class="sh">Fonas</h3>
+<div id="tho" class="rw"><button type="button" class="opt" data-th="0">Tamsus</button><button type="button" class="opt" data-th="1">Šviesus</button><button type="button" class="opt" data-th="2">Taktinis</button></div>
+<p class="s" id="thx" style="margin-top:8px"></p>
+<div class="nav"><button id="b5">← Atgal</button></div></section>
 </main>
 <script>
 var Y=[["","–"],["A","A – skubiai (iki 1 val.)"],["B","B – skubiai chirurgiškai"],["C","C – prioritetas (iki 4 val.)"],["D","D – įprastas"],["E","E – patogumo"]];
@@ -211,11 +237,11 @@ salute:{n:"SALUTE",d:"Pastebėjimo raportas / SALUTE",fmt:function(v){var g=func
 {k:"S",id:"s",l:"Priešo padalinio DYDIS",p:"pvz. 5 asmenys, 2 automobiliai"},
 {k:"A",id:"a",l:"Priešo padalinio VEIKSMAI",t:"a"},
 {k:"L",id:"l",gps:1,l:"Priešo buvimo VIETA"},
-{k:"U",id:"u",l:"Priešo padalinio RŪŠIS"},
+{k:"U",id:"u",l:"Unit/Uniform (Apranga)",p:"pvz. juoda uniforma, geltonos juostos, su šalmais"},
 {k:"T",id:"t",l:"Priešo veiksmų DATA ir LAIKAS",dt:1},
 {k:"E",id:"e",l:"Priešo GINKLUOTĖ, EKIPUOTĖ, TECHNIKA",t:"a"},
 {id:"ph",t:"ph",l:"Nuotraukos"}]},
-mist:{n:"MIST",d:"Sužeistojo raportas pagal TCCC kortelę",fmt:function(v){var g=function(k){return v[k]||""};var ck=function(k,b){var t=g(k+"_k");return g(k).split(", ").filter(Boolean).map(function(x){return x==="Kita"&&t?(b===2?"":b?t:"Kita: "+t):x}).filter(Boolean).join(", ")},il=g("i").split(", ").filter(Boolean).map(function(n){var a=((v.iq||"").split("|").filter(function(s){return s.split(";")[0]===n})[0]||"").split(";");var nn=n+(a[3]?" – "+a[3].split(",").join(", ").toLowerCase():"");return a[1]==="1"?nn+" (turniketas"+(a[2]?": "+a[2]+"val.":"")+")":a[1]==="0"?nn+" (turniketas: NE)":nn}).join("; ");var lm=g("i").split(", ").filter(Boolean).filter(function(n){var a=((v.iq||"").split("|").filter(function(s){return s.split(";")[0]===n})[0]||"").split(";");return a[1]==="1"}),tp=g("tq").split(", ").filter(function(x){return x&&x!=="Galūnės"});if(lm.length)tp.unshift(lm.join(", "));else if(g("tq").indexOf("Galūnės")>=0)tp.unshift("Galūnės");var tqt=tp.join(", "),xk=[g("ta").indexOf("Kita")>=0&&g("ta_k"),g("to").indexOf("Kita")>=0&&g("to_k")].filter(Boolean);var rw=function(k,l){var p=(v[k]||"").split("|"),a=[p[0],p[1],({IV:"Į veną",IO:"Į kaulą/kaulų čiulpų ertmę",IM:"Į raumenį",PO:"",IN:"Per nosį"})[p[2]],p[3]&&p[3]+"val"].filter(Boolean).join(" ");return a?(l?l+" - ":"")+a:""},j=function(a){return a.filter(Boolean).join("; ")},tl=[j([tqt&&"Turniketas - "+tqt,g("tv")&&"Tvarstymas - "+ck("tv",1)]),ck("ta",2),g("tb"),j([rw("fl","Skysčiai"),rw("bl","Kraujo produktai"),rw("an",""),rw("ab",""),rw("ot","Kita")]),ck("to",2)],tx=tl.filter(Boolean);var P=function(x){return x&&!/[.;]$/.test(x)?x+".":x},E=function(x){return x.replace(/;$/,".")};return "M: "+P(ck("m",1))+"\nI: "+P(il)+"\nS: "+P([g("sp")&&"Pulsas: "+g("sp"),g("rr")&&"Kvėpavimo dažnis: "+g("rr"),g("av")&&"Sąmonė: "+g("av").charAt(0)].filter(Boolean).join(", "))+"\nT:"+E((tx.length||xk.length?" "+tx.join("; ")+(xk.length?(tx.length?", ":"")+xk.join(", "):"")+".":""))},f:[
+mist:{n:"MIST",d:"Sužeistojo raportas pagal TCCC kortelę",fmt:function(v){var g=function(k){return v[k]||""};var ck=function(k,b){var t=g(k+"_k");return g(k).split(", ").filter(Boolean).map(function(x){return x==="Kita"&&t?(b===2?"":b?t:"Kita: "+t):x}).filter(Boolean).join(", ")},il=g("i").split(", ").filter(Boolean).map(function(n){var a=((v.iq||"").split("|").filter(function(s){return s.split(";")[0]===n})[0]||"").split(";");var nn=n+(a[3]?" – "+a[3].split(",").join(", ").toLowerCase():"");return a[1]==="1"?nn+" (turniketas"+(a[2]?": "+a[2]+"val.":"")+")":a[1]==="0"?nn+" (turniketas: NE)":nn}).join("; ");var lm=g("i").split(", ").filter(Boolean).filter(function(n){var a=((v.iq||"").split("|").filter(function(s){return s.split(";")[0]===n})[0]||"").split(";");return a[1]==="1"}),tp=g("tq").split(", ").filter(function(x){return x&&x!=="Galūnės"});if(lm.length)tp.unshift(lm.join(", "));else if(g("tq").indexOf("Galūnės")>=0)tp.unshift("Galūnės");var tqt=tp.join(", "),xk=[g("ta").indexOf("Kita")>=0&&g("ta_k"),g("to").indexOf("Kita")>=0&&g("to_k")].filter(Boolean);var rw=function(k,l){var p=(v[k]||"").split("|"),a=[p[0],p[1],({IV:"Į veną",IO:"Į kaulą/kaulų čiulpų ertmę",IM:"Į raumenį",PO:"",IN:"Per nosį"})[p[2]],p[3]&&p[3]+"val"].filter(Boolean).join(" ");return a?(l?l+" - ":"")+a:""},j=function(a){return a.filter(Boolean).join("; ")},tl=[tqt&&'"C": Turniketas - '+tqt,g("tv")&&'"C": Tvarstymas - '+ck("tv",1),ck("ta",1)&&"A: "+ck("ta",1),g("tb")&&"B: "+g("tb"),j([rw("fl","Skysčiai"),rw("bl","Kraujo produktai"),rw("an",""),rw("ab",""),rw("ot","Kita")])&&"C: "+j([rw("fl","Skysčiai"),rw("bl","Kraujo produktai"),rw("an",""),rw("ab",""),rw("ot","Kita")]),ck("to",1)].filter(Boolean),sv=[g("av")&&"Sąmonė: "+g("av").charAt(0),g("rr")&&"Kvėpavimo dažnis: "+g("rr"),g("sp")&&"Pulsas: "+g("sp")].filter(Boolean);var P=function(x){return x&&!/;$/.test(x)?x+";":x},ln=function(k,a,sep,end){return a.length?a.map(function(x,i){return k+": "+x+(i<a.length-1?sep:end)}).join("\n"):k+": "};return "M: "+P(ck("m",1))+"\nI: "+P(il)+"\n"+ln("S",sv,";",";")+"\n"+ln("T",tl,";",";")},f:[
 {k:"M",id:"m",l:"Kaip įvyko sužalojimas",t:"c",o:["Šautinis (GSW)","Sprogimas (blast)","Nudegimas (burn)","Buka trauma (blunt)","Kita (other)"]},
 {k:"I",id:"i",l:"Kokie matomi/žinomi sužalojimai",t:"c",o:["D ranka","K ranka","D koja","K koja","Galva","Kaklas","Krūtinė","Pilvas","Nugara","Dubuo/tarpvietė"]},
 {id:"sp",n:1,hd:"Gyvybinės funkcijos",hk:"S",l:"Pulsas (dūžiai/min)",p:"pvz. 110"},
@@ -255,6 +281,20 @@ R.w5={n:"5W",d:"Taktinis 5W raportas",fmt:function(v){var g=function(k){return (
 {k:"WHEN",id:"when",dt:1,l:"Kada? Laikas (DTG)"},
 {k:"WHY",id:"why",t:"a",l:"Kodėl / koks tikslas?",p:"pvz. tikėtina, priešas ruošiasi užimti gynybines pozicijas"},
 {id:"ph",t:"ph",l:"Nuotraukos"}]};
+R.dron={n:"DRONREP",d:"Drono pastebėjimo raportas",fmt:function(v){var g=function(k){return (v[k]||"").trim()},n=function(k){return g(k)||"–"};return "DRONREP\nKam: "+g("kam")+"\nNuo ko: "+g("nuo")+"\nDTG: "+g("dtg")+"\nPranešimo numeris: "+g("nr")+"\n1. "+n("d1")+"\n2. "+n("d2")+"\n3.A. "+n("da")+"\n3.B. "+n("db")+"\n3.C. "+n("dc")+"\n3.D. "+n("dd")+"\n3.E. "+n("de")+"\n3.F. "+n("df")+"\n3.G. "+n("dg")+"\n3.H. "+n("dh")+"\n4. "+n("d4")},f:[
+{id:"kam",l:"Kam (šaukinys)"},{id:"nuo",l:"Nuo ko (šaukinys)"},{id:"dtg",l:"Data/Laikas DTG",dt:1},{id:"nr",n:1,l:"Pranešimo numeris"},
+{k:"1",id:"d1",l:"Aptikimo būdas",p:"pvz. radaras, pamatyta, išgirsta"},
+{k:"2",id:"d2",gps:1,l:"Stebėtojo koordinatės"},
+{k:"3.A",id:"da",l:"Kas pastebėta",p:"pvz. DJI Mavic, fotografuoja, skrido vakarų kryptimi"},
+{k:"3.B",id:"db",l:"Tipas",p:"pvz. kvadrakopteris, fiksuoto sparno"},
+{k:"3.C",id:"dc",l:"Skaičius",p:"pvz. vienas, grupė"},
+{k:"3.D",id:"dd",l:"Apkrova",p:"pvz. bomba, kamera, tiekimo paketas"},
+{k:"3.E",id:"de",l:"Dydis"},
+{k:"3.F",id:"df",l:"Aukštis"},
+{k:"3.G",id:"dg",l:"Kryptis"},
+{k:"3.H",id:"dh",l:"Kita",p:"pvz. šviesos, spalva, greitis"},
+{k:"4",id:"d4",t:"a",l:"Stebėtojo veiksmai",p:"pvz. slepiamės, pranešame vadui, atsitraukiame"},
+{id:"ph",t:"ph",l:"Nuotraukos"}]};
 R.medevac={n:"9-LINER MEDEVAC",d:"Sužeistųjų evakuacijos raportas",wiz:1,fmt:function(v){var o=["9-LINER MEDEVAC"];for(var i=1;i<10;i++)o.push(i+". "+(v["l"+i]||"-"));return o.join("\n")},f:[
 {id:"l1",gps:1,l:"Surinkimo vietos koordinatės",p:"Įveskite koordinates (MGRS)"},
 {id:"l2",t:"a",l:"Surinkimo vietos dažnis, šaukinys, slaptažodis",p:"Pvz. dažnis, šaukinys, slaptažodis"},
@@ -267,8 +307,13 @@ R.medevac={n:"9-LINER MEDEVAC",d:"Sužeistųjų evakuacijos raportas",wiz:1,fmt:
 {id:"l9",t:"b",m:1,l:"MNG situacija ir vietovės užterštumas",o:[["N","Branduolinis"],["B","Biologinis"],["C","Cheminis"]]}]};
 var cur=null,V={},st=0,MS=[V],mi=0,dj=-1;
 function $(i){return document.getElementById(i)}
-function show(n){$("clr").classList.toggle("hide",n===0);$("wipe").classList.toggle("hide",n!==1&&n!==2);if(n===0)drawL();for(var i=0;i<5;i++)$("v"+i).classList.toggle("hide",i!==n);window.scrollTo(0,0)}
-function now(){var d=new Date(),f={};new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Vilnius",hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).formatToParts(d).forEach(function(x){f[x.type]=x.value});var off=Math.round((Date.UTC(+f.year,+f.month-1,+f.day,+f.hour,+f.minute)-Math.floor(d.getTime()/60000)*60000)/3600000),z=off===3?"C":off===2?"B":"Z";return f.day+" "+f.hour+f.minute+z+" "+["SAU","VAS","KOV","BAL","GEG","BIR","LIE","RGP","RGS","SPA","LAP","GRD"][+f.month-1]+" "+f.year.slice(2)}
+function show(n){$("clr").classList.toggle("hide",n===0);$("set").classList.toggle("hide",n!==0);$("wipe").classList.toggle("hide",n!==1&&n!==2);if(n===0)drawL();for(var i=0;i<6;i++)$("v"+i).classList.toggle("hide",i!==n);window.scrollTo(0,0)}
+var TZ="A";
+function now(){var d=new Date(),f={},z,M=["SAU","VAS","KOV","BAL","GEG","BIR","LIE","RGP","RGS","SPA","LAP","GRD"],p=function(n){return (n<10?"0":"")+n};
+ if(TZ==="B"||TZ==="C"){var u=new Date(d.getTime()+(TZ==="B"?2:3)*3600000);return p(u.getUTCDate())+" "+p(u.getUTCHours())+p(u.getUTCMinutes())+TZ+" "+M[u.getUTCMonth()]+" "+String(u.getUTCFullYear()).slice(2)}
+ new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Vilnius",hourCycle:"h23",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}).formatToParts(d).forEach(function(x){f[x.type]=x.value});
+ var off=Math.round((Date.UTC(+f.year,+f.month-1,+f.day,+f.hour,+f.minute)-Math.floor(d.getTime()/60000)*60000)/3600000);z=TZ==="J"?"J":off===3?"C":off===2?"B":"Z";
+ return f.day+" "+f.hour+f.minute+z+" "+M[+f.month-1]+" "+f.year.slice(2)}
 function mgrs(lat,lon){
  var a=6378137,f=1/298.257223563,k0=0.9996,e2=f*(2-f),ep2=e2/(1-e2),e4=e2*e2,e6=e4*e2;
  var z=Math.floor((lon+180)/6)+1,l0=((z-1)*6-180+3)*Math.PI/180,ph=lat*Math.PI/180,la=lon*Math.PI/180;
@@ -283,16 +328,18 @@ function mgrs(lat,lon){
  var P=function(v){return String(Math.floor(v%100000)).padStart(5,"0")};
  return z+b+col+row+" "+P(x)+" "+P(y)}
 var PH={};function drawP(id,ed){var c=$(id),fs=PH[cur]||[];if(!c)return;c.innerHTML=fs.map(function(f,j){return "<span><img src='"+URL.createObjectURL(f)+"' alt=''>"+(ed?"<button type='button' data-pd='"+j+"' aria-label='Pašalinti'>×</button>":"")+"</span>"}).join("")+(!ed&&fs.length?"<p>Nuotraukų: "+fs.length+". Jos siunčiamos tik per „Dalintis“, kopijuojant jos nepridedamos.</p>":"");c.onclick=function(e){var b=e.target.closest("[data-pd]");if(b){PH[cur].splice(+b.dataset.pd,1);drawP(id,ed)}}}
-var VER="28 · 2026-11-11",D={},CS={},NR={},H=[];
+var VER="30 · 2026-11-11",D={},CS={},NR={},H=[];
 var RQ={sitrep:["kam","nuo","nr","a","b"],sitrepk:["kam","nuo","dtg","nr"],salute:["kam","nuo","dtg","l"],salta:["kam","nuo","dtg","l"],w5:["who","what","where","when","why"],medevac:["l1","l2","l3"],mist:["m","i"],kilimo:["k1","k2","k3","k5"]};
 function flat(k){return [].concat.apply([],R[k].f.map(function(x){return x.g||[x]}))}
 function has(k,id){return flat(k).some(function(f){return f.id===id})}
-function persist(){try{localStorage.setItem("rp2",JSON.stringify({d:D,cs:CS,nr:NR,h:H}))}catch(e){}}
+function persist(){try{localStorage.setItem("rp2",JSON.stringify({d:D,cs:CS,nr:NR,h:H,tz:TZ}))}catch(e){}}
 function save(){if(!cur)return;D[cur]={ms:MS,mi:mi};if(has(cur,"kam")){CS.kam=V.kam||"";CS.nuo=V.nuo||""}persist()}
-function load(){try{var s=JSON.parse(localStorage.getItem("rp2")||"null");if(s){D=s.d||{};CS=s.cs||{};NR=s.nr||{};H=s.h||[]}else{var o=JSON.parse(localStorage.getItem("rp")||"null");if(o&&o.c&&R[o.c]){D[o.c]={ms:o.ms&&o.ms.length?o.ms:[o.v||{}],mi:o.mi||0};persist()}}}catch(e){}}
+function load(){try{var s=JSON.parse(localStorage.getItem("rp2")||"null");if(s){D=s.d||{};CS=s.cs||{};NR=s.nr||{};H=s.h||[];TZ=s.tz||"A"}else{var o=JSON.parse(localStorage.getItem("rp")||"null");if(o&&o.c&&R[o.c]){D[o.c]={ms:o.ms&&o.ms.length?o.ms:[o.v||{}],mi:o.mi||0};persist()}}}catch(e){}}
 function fresh(k){var v={};if(has(k,"kam")){v.kam=CS.kam||"";v.nuo=CS.nuo||""}if(has(k,"nr")&&/^\d+$/.test(NR[k]||""))v.nr=String(+NR[k]+1);return v}
-function dirty(k){var d=D[k];return !!d&&(d.ms||[]).some(function(o){return Object.keys(o).some(function(x){return o[x]&&["kam","nuo","nr","prev"].indexOf(x)<0})})}
-function openR(k){cur=k;var d=D[k];if(d&&d.ms&&d.ms.length&&d.ms.some(function(o){return Object.keys(o).some(function(x){return o[x]})})){MS=d.ms;mi=Math.min(d.mi||0,MS.length-1);V=MS[mi]}else{V=fresh(k);MS=[V];mi=0}if(has(k,"kam"))MS.forEach(function(o){o.kam=CS.kam||"";o.nuo=CS.nuo||""});st=0;build();show(1)}
+function dts(k){return flat(k).filter(function(f){return f.dt}).map(function(f){return f.id})}
+function adt(){dts(cur).forEach(function(id){MS.forEach(function(o){if(!o[id])o[id]=now()})})}
+function dirty(k){var d=D[k],ig=["kam","nuo","nr","prev"].concat(dts(k));return !!d&&(d.ms||[]).some(function(o){return Object.keys(o).some(function(x){return o[x]&&ig.indexOf(x)<0})})}
+function openR(k){cur=k;var d=D[k];if(d&&d.ms&&d.ms.length&&d.ms.some(function(o){return Object.keys(o).some(function(x){return o[x]})})){MS=d.ms;mi=Math.min(d.mi||0,MS.length-1);V=MS[mi]}else{V=fresh(k);MS=[V];mi=0}if(has(k,"kam"))MS.forEach(function(o){o.kam=CS.kam||"";o.nuo=CS.nuo||""});adt();st=0;build();show(1)}
 function miss(){var fl=flat(cur),out=[];MS.forEach(function(o,j){(RQ[cur]||[]).forEach(function(id){if(!(o[id]||"").trim()){var f=fl.filter(function(x){return x.id===id})[0];if(f)out.push((MS.length>1?"MIST "+(j+1)+": ":"")+(f.hk||f.k?(f.hk||f.k)+" – ":"")+(f.hd||f.l).replace(/\s*\([^)]*\)/g,""))}})});return out}
 function hadd(t){if(!cur||!t.trim())return;if(V.nr&&has(cur,"nr"))NR[cur]=V.nr;if(!(H[0]&&H[0].t===t&&H[0].k===cur)){H.unshift({k:cur,t:t,d:now(),ms:JSON.parse(JSON.stringify(MS))});H=H.slice(0,10)}persist()}
 function drawH(){var q=function(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;")};$("hist").innerHTML=H.length?H.map(function(e,j){return "<details><summary><b>"+(R[e.k]?R[e.k].n:e.k)+"</b><small>"+e.d+"</small></summary><pre>"+q(e.t)+"</pre><div class='act'><button type='button' data-hc='"+j+"'>Kopijuoti</button><button type='button' data-hu='"+j+"'>Naudoti kaip pagrindą</button></div></details>"}).join(""):"<p class='s'>Istorija tuščia.</p>";$("hclr").classList.toggle("hide",!H.length)}
@@ -306,17 +353,17 @@ function build(){
   if(f.t==="r"){var rv=val.split("|"),dl="d_"+f.id,q=function(x){return (x||"").replace(/'/g,"&#39;")};lab="";el="<details class='ac'"+(f.op||val.replace(/\|/g,"")?" open":"")+"><summary>"+f.l+"</summary>"+(f.pp?"<label class='sw' style='margin:12px 0 18px 12px'><span class='sl'>Pillpack</span><input type='checkbox' id='pp_"+f.id+"'"+(V[f.id+"_pp"]?" checked":"")+"><span class='tr'></span></label>":"")+"<div class='rw' id='"+id+"'>"+(f.o?"<select><option value=''>Pavadinimas</option>"+f.o.map(function(o){return "<option"+(rv[0]===o?" selected":"")+">"+o+"</option>"}).join("")+"</select>":"<input placeholder='"+(f.p||"Pavadinimas")+"' value='"+q(rv[0])+"'>")+"<input placeholder='Dozė' value='"+q(rv[1])+"'><select><option value=''>Būdas</option>"+[["IV","Į veną"],["IO","Į kaulą/kaulų čiulpų ertmę"],["IM","Į raumenį"],["PO","Per burną"],["IN","Per nosį"]].map(function(o){return "<option value='"+o[0]+"'"+(rv[2]===o[0]?" selected":"")+">"+o[0]+" ("+o[1]+")</option>"}).join("")+"</select><input class='tm' placeholder='Laikas hh:mm' inputmode='numeric' maxlength='5' value='"+q(rv[3])+"'></div></details>"}
   else if(f.t==="n"){var mp={};val.split(", ").forEach(function(q){var z=q.split("-");if(z[0])mp[z[0]]=+z[1]});el="<div id='"+id+"'>"+f.o.map(function(o){return "<div class='cr' data-k='"+o[0]+"'><span><b>"+o[0]+"</b> — "+o[1]+"</span><button type='button' data-d='-1'>−</button><output>"+(mp[o[0]]||0)+"</output><button type='button' data-d='1'>+</button></div>"}).join("")+"</div>"}
   else if(f.t==="b"){var sl=val.split(", ");el="<div class='tg' id='"+id+"'"+(f.m?" data-m='1'":"")+">"+f.o.map(function(o){var k=typeof o==="string"?o:o[0];return "<button type='button' data-k='"+k+"'"+(sl.indexOf(k)>=0?" class='on'":"")+">"+(typeof o==="string"?o:o[0]+" — "+o[1])+"</button>"}).join("")+"</div>"}
-  else if(f.t==="p"){el="<textarea id='"+id+"' placeholder='"+(f.p||"")+"'></textarea><button type='button' data-ps='"+id+"' style='width:100%;margin-top:8px;background:rgba(200,217,74,.28);border-color:rgba(200,217,74,.45);color:var(--tx)'>"+f.bt+"</button><div id='psm' style='color:var(--mu);font-size:13px;margin-top:6px'></div>"}
+  else if(f.t==="p"){el="<textarea id='"+id+"' placeholder='"+(f.p||"")+"'></textarea><button type='button' data-ps='"+id+"' style='width:100%;margin-top:8px;background:var(--af);border-color:var(--al);color:var(--tx)'>"+f.bt+"</button><div id='psm' style='color:var(--mu);font-size:13px;margin-top:6px'></div>"}
   else if(f.t==="c"){var sv=val.split(", "),kt=V[f.id+"_k"]||"",ex=function(o){return o.replace(/\s*\([^)]*\)/g,"")};el="<div id='"+id+"'>"+f.o.map(function(o){var vv=ex(o);var on=sv.indexOf(vv)>=0,isk=vv==="Kita";return "<label class='ch'"+(isk&&on?" style='display:none'":"")+"><input type='checkbox' value='"+vv+"'"+(on?" checked":"")+"><span>"+o+"</span></label>"+(isk?"<input class='ko' id='"+id+"_k' placeholder='Kita (other)' value='"+kt.replace(/'/g,"&#39;")+"'"+(on?"":" style='display:none'")+">":"")+(f.id==="i"&&vv==="K koja"?"<br>":"")}).join("")+"</div>"+(f.id==="i"?"<div id='tqx'></div>":"")}
   else if(f.t==="s"){el="<select id='"+id+"'><option value=''>–</option>"+f.o.map(function(o){return "<option"+(o===val?" selected":"")+">"+o+"</option>"}).join("")+"</select>"}
   else if(f.t==="a"){el="<textarea id='"+id+"' placeholder='"+(f.p||"")+"'"+(f.gps?" style='flex:1;min-width:0'":"")+">"+val.replace(/</g,"&lt;")+"</textarea>";if(f.gps)el="<div style='display:flex;gap:8px;align-items:flex-start'>"+el+"<button type='button' data-gps='"+id+"' style='flex:none'>GPS</button></div>"}
   else if(f.gps){el="<div class='row'><input id='"+id+"' placeholder='"+(f.p||"")+"' value='"+val.replace(/'/g,"&#39;")+"'><button type='button' data-gps='"+id+"'>GPS</button></div>"}
   else if(f.dt){el="<div class='row'><input id='"+id+"' placeholder='DD HHMMB MMM YY' value='"+val+"'><button type='button' data-now='"+id+"'>Dabar</button></div>"}
-  else if(f.t==="ph"){el="<div id='ph_box' class='phb'></div><input type='file' id='ph_in' accept='image/*' multiple style='display:none'><button type='button' id='ph_btn' style='width:100%;border-color:rgba(200,217,74,.45)'>Pridėti nuotrauką</button>"}
+  else if(f.t==="ph"){el="<div id='ph_box' class='phb'></div><input type='file' id='ph_in' accept='image/*' multiple style='display:none'><button type='button' id='ph_btn' style='width:100%;border-color:var(--al)'>Pridėti nuotrauką</button>"}
   else{el="<input id='"+id+"'"+(f.n?" inputmode='numeric'":"")+" placeholder='"+(f.p||"")+"' value='"+val.replace(/'/g,"&#39;")+"'>"}
   h+=lab+el});
  if(cur==="mist"){var tb="";if(MS.length>1){tb="<div class='mt' style='margin-bottom:12px'>"+MS.map(function(_,j){return "<span style='display:inline-flex;margin:0 6px 6px 0'><button type='button' class='"+(j===mi?"p":"")+"' data-mi='"+j+"' style='padding:8px 12px;border-radius:8px 0 0 8px'>MIST "+(j+1)+"</button><button type='button' data-del='"+j+"' aria-label='Ištrinti' style='padding:8px 10px;border-radius:0 8px 8px 0;border-left:0;color:#ff4d4d;font-weight:700"+(dj===j?";background:#c0392b;color:#fff":"")+"'>"+(dj===j?"Ištrinti?":"×")+"</button></span>"}).join("")+"</div>"}h=tb+h+"<button type='button' id='addm' style='width:100%;margin-top:22px;display:flex;justify-content:space-between;align-items:center'>Pridėti MIST "+(MS.length+1)+"<span style='font-size:26px;line-height:1;color:var(--ac);font-weight:700'>+</span></button>"}
- $("form").className=cur==="mist"?"mist":cur==="salta"||cur==="salute"||cur==="w5"?"salta":"";$("form").innerHTML=h;
+ $("form").className=cur==="mist"?"mist":cur==="salta"||cur==="salute"||cur==="w5"||cur==="dron"?"salta":"";$("form").innerHTML=h;
  if($("ph_btn")){$("ph_btn").onclick=function(){$("ph_in").click()};$("ph_in").onchange=function(){PH[cur]=(PH[cur]||[]).concat([].slice.call(this.files));this.value="";drawP("ph_box",1)};drawP("ph_box",1)}
  $("form").querySelectorAll("[data-ps]").forEach(function(b){b.onclick=function(){var pf=grp.filter(function(x){return x.t==="p"})[0],o=pf.ps($(b.dataset.ps).value);if(!o){$("psm").textContent=pf.er;return}collect();for(var k in o)V[k]=o[k];V.prev="";save();build();$("psm").innerHTML=pf.ok}});
  $("form").querySelectorAll("[data-now]").forEach(function(b){b.onclick=function(){$(b.dataset.now).value=now()}});
@@ -340,7 +387,7 @@ function text(){
   o.push(pre+f.l+": "+v)});
  return o.join("\n")}
 var L=$("list");
-function drawL(){L.innerHTML="";["sitrep","sitrepk","salute","salta","w5","medevac","mist","kilimo"].forEach(function(k){var b=document.createElement("button");b.className="card";b.innerHTML=(dirty(k)?"<i class='bdg' style='font-style:normal'>juodraštis</i>":"")+"<b>"+R[k].n+"</b><span>"+R[k].d+"</span>";b.onclick=function(){openR(k)};L.appendChild(b)});$("hl").textContent="Išsiųstų raportų istorija"+(H.length?" ("+H.length+")":"");$("ver").textContent="Versija "+VER;$("hk").value=CS.kam||"";$("hn").value=CS.nuo||""}
+function drawL(){L.innerHTML="";["sitrep","sitrepk","salute","salta","w5","medevac","mist","dron","kilimo"].forEach(function(k){var b=document.createElement("button");b.className="card";b.innerHTML=(dirty(k)?"<i class='bdg' style='font-style:normal'>juodraštis</i>":"")+"<b>"+R[k].n+"</b><span>"+R[k].d+"</span>";b.onclick=function(){openR(k)};L.appendChild(b)});$("hl").textContent="Išsiųstų raportų istorija"+(H.length?" ("+H.length+")":"");$("ver").textContent="Versija "+VER;}
 $("b1").onclick=function(){collect();if(R[cur].wiz&&st>0){st--;build();window.scrollTo(0,0)}else show(0)};
 $("n1").onclick=function(){dj=-1;collect();if(R[cur].wiz&&st<R[cur].f.length-1){st++;build();window.scrollTo(0,0);return}$("out").textContent=text();$("out").contentEditable="false";$("ed").textContent="Redaguoti";drawP("phr",0);show(2)};
 $("b2").onclick=function(){show(1)};
@@ -349,7 +396,15 @@ $("inp").onclick=function(e){e.preventDefault();show(3);$("iph").scrollIntoView(
 $("b3").onclick=function(){show(0)};
 $("clr").onclick=function(){if(!$("v1").classList.contains("hide"))collect();show(0)};
 var wt=0;$("wipe").onclick=function(){var b=this;delete D[cur];delete PH[cur];delete NR[cur];V=fresh(cur);MS=[V];mi=0;st=0;dj=-1;persist();build();show(1);clearTimeout(wt);b.textContent="Išvalyta ✓";b.classList.add("ok");wt=setTimeout(function(){b.textContent="Išvalyti";b.classList.remove("ok")},1500)};
-$("hk").oninput=function(){CS.kam=this.value.trim();persist()};$("hn").oninput=function(){CS.nuo=this.value.trim();persist()};
+function hsu(){$("hs").textContent=CS.kam||CS.nuo?(CS.kam||"–")+" / "+(CS.nuo||"–"):""}
+$("hk").oninput=function(){CS.kam=this.value.trim();persist();hsu()};$("hn").oninput=function(){CS.nuo=this.value.trim();persist();hsu()};
+$("hk").onblur=$("hn").onblur=function(){setTimeout(function(){var a=document.activeElement;if(a!==$("hk")&&a!==$("hn")&&$("hk").value.trim()&&$("hn").value.trim())$("csd").open=false},0)};
+function thm(l){var c=document.documentElement.classList;c.toggle("light",l==="1");c.toggle("tac",l==="2");var m=document.querySelector("meta[name=theme-color]");if(m)m.content=l==="1"?"#ffffff":l==="2"?"#000000":"#111111"}
+var LT="0";try{LT=localStorage.getItem("rpt")||"0"}catch(e){}thm(LT);
+function drawS(){$("hk").value=CS.kam||"";$("hn").value=CS.nuo||"";hsu();[].forEach.call($("tzo").children,function(b){b.classList.toggle("on",b.dataset.tz===TZ)});[].forEach.call($("tho").children,function(b){b.classList.toggle("on",b.dataset.th===LT)});$("thx").textContent={"0":"Tamsus: tamsiai pilkas fonas ir šviesus tekstas, tinka daugumai sąlygų.","1":"Šviesus: baltas fonas ir tamsus tekstas, geriau matosi ryškioje saulėje.","2":"Taktinis: juodas fonas ir žalias tekstas, mažiau šviesos tamsoje."}[LT];$("tzx").textContent=now();$("tzs").textContent=TZ==="A"?"Automatiškai":TZ}
+$("set").onclick=function(){drawS();$("csd").open=!(CS.kam&&CS.nuo);$("tzd").open=false;show(5)};$("b5").onclick=function(){show(0)};
+$("tzo").onclick=function(e){var b=e.target.closest("[data-tz]");if(!b)return;TZ=b.dataset.tz;persist();drawS()};
+$("tho").onclick=function(e){var b=e.target.closest("[data-th]");if(!b)return;LT=b.dataset.th;thm(LT);try{localStorage.setItem("rpt",LT)}catch(x){}drawS()};
 $("hl").onclick=function(e){e.preventDefault();drawH();show(4)};
 $("b4").onclick=function(){show(0)};
 var ht=0;$("hclr").onclick=function(){var b=this;if(!ht){b.textContent="Tikrai ištrinti?";b.style.color="#ff4d4d";ht=setTimeout(function(){ht=0;b.textContent="Ištrinti istoriją";b.style.color=""},3000);return}clearTimeout(ht);ht=0;b.textContent="Ištrinti istoriją";b.style.color="";H=[];persist();drawH()};
